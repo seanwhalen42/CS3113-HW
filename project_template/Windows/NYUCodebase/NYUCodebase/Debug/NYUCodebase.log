@@ -1,13 +1,8 @@
-﻿Build started 9/14/2014 4:12:08 PM.
+﻿Build started 9/14/2014 6:59:49 PM.
      1>Project "C:\Users\Sean\CS3113-HW\project_template\Windows\NYUCodebase\NYUCodebase\NYUCodebase.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2\include /IC:\SDL2_image\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\users\sean\cs3113-hw\project_template\windows\nyucodebase\nyucodebase\main.cpp(51): warning C4129: 'g' : unrecognized character escape sequence
-     1>c:\users\sean\cs3113-hw\project_template\windows\nyucodebase\nyucodebase\main.cpp(51): warning C4129: 'B' : unrecognized character escape sequence
-     1>c:\users\sean\cs3113-hw\project_template\windows\nyucodebase\nyucodebase\main.cpp(51): warning C4129: 'P' : unrecognized character escape sequence
-     1>c:\users\sean\cs3113-hw\project_template\windows\nyucodebase\nyucodebase\main.cpp(51): warning C4129: 'C' : unrecognized character escape sequence
-     1>c:\users\sean\cs3113-hw\project_template\windows\nyucodebase\nyucodebase\main.cpp(51): warning C4129: 'c' : unrecognized character escape sequence
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Sean\CS3113-HW\project_template\Windows\NYUCodebase\Debug\NYUCodebase.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 SDL2.lib SDL2main.lib SDL2_image.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Sean\CS3113-HW\project_template\Windows\NYUCodebase\Debug\NYUCodebase.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Sean\CS3113-HW\project_template\Windows\NYUCodebase\Debug\NYUCodebase.lib" /MACHINE:X86 Debug\main.obj
          NYUCodebase.vcxproj -> C:\Users\Sean\CS3113-HW\project_template\Windows\NYUCodebase\Debug\NYUCodebase.exe
@@ -15,4 +10,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.01
+Time Elapsed 00:00:00.90

@@ -39,26 +39,33 @@ void DrawSprite(GLint texture, float x, float y, float rotation) {
 
 int main(int argc, char *argv[])
 {
+	//Set up window
 	SDL_Init(SDL_INIT_VIDEO);
 	displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
 	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
 	SDL_GL_MakeCurrent(displayWindow, context);
 
-
+	//General setup
 	bool done = false;
 	float lastFrameTicks = 0.0f;
-	GLfloat triangle[] = { 0.0f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f };
-	std::string imagePathStr = "assets\graphics\Boardgame pack(520 assets)\PNG\Cards\cardSpadesA.png";
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	//Draw Ace of Spades
+	std::string imagePathStr = "cardSpadesA.png";
 	const char* image_path = imagePathStr.c_str();
 	GLuint aceOfSpades = LoadTexture(image_path);
 	DrawSprite(aceOfSpades, 0.0f, 0.0f, 0.0f);
+    
+	//Draw triangle
+	GLfloat triangle[] = { 0.0f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f };
 	glVertexPointer(2, GL_FLOAT, 0, triangle);
 	glEnableClientState(GL_VERTEX_ARRAY);
-	//glTranslatef(1.0, 0.0, 0.0);
+	glTranslatef(1.0, 0.0, 0.0);
 	glEnableClientState(GL_COLOR_ARRAY);
 	GLfloat triangleColors[] = { 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 };
 	glColorPointer(3, GL_FLOAT, 0, triangleColors);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+	
 	SDL_Event event;
 	while (!done) {
 		float ticks = (float)SDL_GetTicks() / 1000.0f;
