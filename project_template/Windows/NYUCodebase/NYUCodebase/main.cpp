@@ -51,20 +51,12 @@ int main(int argc, char *argv[])
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	//Draw Ace of Spades
-	std::string imagePathStr = "cardSpadesA.png";
-	const char* image_path = imagePathStr.c_str();
-	GLuint aceOfSpades = LoadTexture(image_path);
-	DrawSprite(aceOfSpades, 0.0f, 0.0f, 0.0f);
+	
+	
     
 	//Draw triangle
-	GLfloat triangle[] = { 0.0f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f };
-	glVertexPointer(2, GL_FLOAT, 0, triangle);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glTranslatef(1.0, 0.0, 0.0);
-	glEnableClientState(GL_COLOR_ARRAY);
-	GLfloat triangleColors[] = { 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 };
-	glColorPointer(3, GL_FLOAT, 0, triangleColors);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	
+	
 	
 	SDL_Event event;
 	while (!done) {
@@ -75,7 +67,19 @@ int main(int argc, char *argv[])
 			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
 				done = true;
 			}
+			std::string imagePathStr = "cardSpadesA.png";
+			const char* image_path = imagePathStr.c_str();
+			GLuint aceOfSpades = LoadTexture(image_path);
+			DrawSprite(aceOfSpades, 0.0f, 0.0f, 0.0f);
 			
+			GLfloat triangle[] = { 0.0f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f };
+			glVertexPointer(2, GL_FLOAT, 0, triangle);
+			glEnableClientState(GL_VERTEX_ARRAY);
+			glTranslatef(1.0, 0.0, 0.0);
+			glEnableClientState(GL_COLOR_ARRAY);
+			GLfloat triangleColors[] = { 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 };
+			glColorPointer(3, GL_FLOAT, 0, triangleColors);
+			glDrawArrays(GL_TRIANGLES, 0, 3);
 		}
 		SDL_GL_SwapWindow(displayWindow);
 	}
