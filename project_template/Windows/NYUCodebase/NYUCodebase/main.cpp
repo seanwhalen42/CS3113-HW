@@ -60,17 +60,20 @@ int main(int argc, char *argv[])
 	
 	SDL_Event event;
 	while (!done) {
-		float ticks = (float)SDL_GetTicks() / 1000.0f;
-		float elapsed = ticks - lastFrameTicks;
-		lastFrameTicks = ticks;
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
 				done = true;
 			}
+			float ticks = (float)SDL_GetTicks() / 1000.0f;
+			float elapsed = ticks - lastFrameTicks;
+			lastFrameTicks = ticks;
 			std::string imagePathStr = "cardSpadesA.png";
 			const char* image_path = imagePathStr.c_str();
 			GLuint aceOfSpades = LoadTexture(image_path);
-			DrawSprite(aceOfSpades, 0.0f, 0.0f, 0.0f);
+			float cardAngle = 0;
+			cardAngle += 45.0f * elapsed;
+			glDisableClientState(GL_COLOR_ARRAY);
+			DrawSprite(aceOfSpades, 0.0f, 0.0f, cardAngle);
 			
 			GLfloat triangle[] = { 0.0f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f };
 			glVertexPointer(2, GL_FLOAT, 0, triangle);
