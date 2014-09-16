@@ -49,41 +49,36 @@ int main(int argc, char *argv[])
 	bool done = false;
 	float lastFrameTicks = 0.0f;
 	glClear(GL_COLOR_BUFFER_BIT);
-
-	//Draw Ace of Spades
-	
-	
-    
-	//Draw triangle
-	
-	
-	
+	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
+	float cardAngle = 0;
 	SDL_Event event;
 	while (!done) {
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
 				done = true;
 			}
-			float ticks = (float)SDL_GetTicks() / 1000.0f;
-			float elapsed = ticks - lastFrameTicks;
-			lastFrameTicks = ticks;
-			std::string imagePathStr = "cardSpadesA.png";
-			const char* image_path = imagePathStr.c_str();
-			GLuint aceOfSpades = LoadTexture(image_path);
-			float cardAngle = 0;
-			cardAngle += 45.0f * elapsed;
-			glDisableClientState(GL_COLOR_ARRAY);
-			DrawSprite(aceOfSpades, 0.0f, 0.0f, cardAngle);
-			
-			GLfloat triangle[] = { 0.0f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f };
-			glVertexPointer(2, GL_FLOAT, 0, triangle);
-			glEnableClientState(GL_VERTEX_ARRAY);
-			glTranslatef(1.0, 0.0, 0.0);
-			glEnableClientState(GL_COLOR_ARRAY);
-			GLfloat triangleColors[] = { 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 };
-			glColorPointer(3, GL_FLOAT, 0, triangleColors);
-			glDrawArrays(GL_TRIANGLES, 0, 3);
 		}
+		glClear(GL_COLOR_BUFFER_BIT);
+		float ticks = (float)SDL_GetTicks() / 1000.0f;
+		float elapsed = ticks - lastFrameTicks;
+		lastFrameTicks = ticks;
+		std::string imagePathStr = "cardSpadesA.png";
+		const char* image_path = imagePathStr.c_str();
+		GLuint aceOfSpades = LoadTexture(image_path);
+		
+		cardAngle += 45.0f * elapsed;
+		glDisableClientState(GL_COLOR_ARRAY);
+		DrawSprite(aceOfSpades, 0.0f, 0.0f, cardAngle);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		
+		GLfloat triangle[] = { 0.0f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f };
+		glVertexPointer(2, GL_FLOAT, 0, triangle);
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glTranslatef(1.0, 0.0, 0.0);
+		glEnableClientState(GL_COLOR_ARRAY);
+		GLfloat triangleColors[] = { 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 };
+		glColorPointer(3, GL_FLOAT, 0, triangleColors);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 		SDL_GL_SwapWindow(displayWindow);
 	}
 
