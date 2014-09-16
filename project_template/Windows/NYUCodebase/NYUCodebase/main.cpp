@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
 		glDisableClientState(GL_COLOR_ARRAY);
 		DrawSprite(aceOfSpades, 0.0f, 0.0f, cardAngle);
 		glDisableClientState(GL_VERTEX_ARRAY);
+		glLoadIdentity();
 		
 		GLfloat triangle[] = { 0.0f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f };
 		glVertexPointer(2, GL_FLOAT, 0, triangle);
@@ -80,6 +81,7 @@ int main(int argc, char *argv[])
 		glColorPointer(3, GL_FLOAT, 0, triangleColors);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		SDL_GL_SwapWindow(displayWindow);
+		glLoadIdentity();
 	}
 
 	SDL_Quit();
