@@ -2,8 +2,16 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
+#include "main.h"
 
 SDL_Window* displayWindow;
+
+void drawNet() {
+	float net[8] = { -0.1, 1, -0.1, -1, 0.1, -1, 0.1, 1 };
+	glVertexPointer(2, GL_FLOAT, 0, net);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glDrawArrays(GL_QUADS, 0, 4);
+};
 
 int main(int argc, char *argv[])
 {
@@ -21,6 +29,7 @@ int main(int argc, char *argv[])
 			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
 				done = true;
 			}
+			drawNet();
 		}
 		SDL_GL_SwapWindow(displayWindow);
 	}

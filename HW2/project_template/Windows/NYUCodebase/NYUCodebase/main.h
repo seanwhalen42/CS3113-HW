@@ -15,3 +15,24 @@ GLuint LoadTexture(std::string image_path_str) {
 	SDL_FreeSurface(surface);
 	return textureID;
 }
+
+class Entity {
+public:
+	Entity(float array[8], std::string texture){
+		texture = LoadTexture(texture);
+
+	}
+
+private:
+	float x;
+	float y;
+	float rotation;
+
+	GLuint textureID;
+	float width;
+	float height;
+	
+	float speed;
+	float direction_x;
+	float direction_y;
+};
