@@ -13,6 +13,8 @@ void drawNet() {
 	glDrawArrays(GL_QUADS, 0, 4);
 };
 
+
+
 int main(int argc, char *argv[])
 {
 	SDL_Init(SDL_INIT_VIDEO);
