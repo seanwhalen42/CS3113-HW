@@ -7,7 +7,7 @@
 SDL_Window* displayWindow;
 
 void drawNet() {
-	float net[8] = { -0.1, 1, -0.1, -1, 0.1, -1, 0.1, 1 };
+	float net[8] = { -0.05, 1, -0.05, -1, 0.05, -1, 0.05, 1 };
 	glVertexPointer(2, GL_FLOAT, 0, net);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glDrawArrays(GL_QUADS, 0, 4);
