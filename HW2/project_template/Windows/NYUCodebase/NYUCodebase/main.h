@@ -2,6 +2,9 @@
 #include <SDL_opengl.h>
 #include <SDL_image.h>
 #include <string>
+#include <vector>
+
+SDL_Window* displayWindow;
 
 GLuint LoadTexture(std::string image_path_str) {
 	const char* image_path = image_path_str.c_str();
@@ -18,20 +21,15 @@ GLuint LoadTexture(std::string image_path_str) {
 
 class Entity {
 public:
-	Entity(float array[8], std::string texture, float r){
-		texture = LoadTexture(texture);
-		x = (array[1] + array[7]) / 2;
-		y = (array[2] + array[4]) / 2;
-		
-		rotation = r;
+	Entity(float array[], float x, float y, std::string texture = " "){
+		if (texture != " "){
+			texture = LoadTexture(texture);
+		}
+		//x = (array[1] + array[7]) / 2;
+		//y = (array[2] + array[4]) / 2;
 		
 		width = array[3] - array[1];
 		height = array[2] - array[4];
-
-		top = array[2];
-		bottom = array[4];
-		left = array[1];
-		right = array[7];
 
 		for (int i = 0; i<8; i++){
 			vertexArray[i] = array[i];
@@ -61,32 +59,49 @@ public:
 	}
 
 	float getTop() {
+		float top = (y + (height / 2));
 		return top;
 	}
 
 	float getBottom(){
+		float bottom = (y - (height / 2));
 		return bottom;
 	}
 
 	float getLeft(){
+		float left = (x - (width / 2));
 		return left;
 	}
 
 	float getRight(){
+		float right = (x + (width / 2));
 		return right;
 	}
-
-	//Mutators
-
-	void update() {
-
-	}
-
 	void draw(){
+		glMatrixMode(GL_MODELVIEW);
+		glTranslatef(x, y, 0);
 		glVertexPointer(2, GL_FLOAT, 0, vertexArray);
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glDrawArrays(GL_QUADS, 0, 4);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glLoadIdentity();
 	}
+	//Mutators
+
+	void setDirection_x(float newX){
+		direction_x = newX;
+	}
+
+	void setDirection_y(float newY){
+		direction_y = newY;
+	}
+
+	void update() {
+		x += direction_x * speed;
+		y += direction_y * speed;
+	}
+
+	
 
 private:
 	float x;
@@ -100,12 +115,6 @@ private:
 	float speed;
 	float direction_x;
 	float direction_y;
-
-	float top;
-	float bottom;
-
-	float left;
-	float right;
 
 	float vertexArray[8];
 };
@@ -122,6 +131,14 @@ void setup() {
 	SDL_GL_MakeCurrent(displayWindow, context);
 };
 
-void update() {
+void update(std::vector<Entity> Entities) {
+	for (Entity i : Entities){
+		i.update();
+	}
+}
 
+void draw(std::vector<Entity> Entities) {
+	for (Entity i : Entities){
+		i.draw();
+	}
 }

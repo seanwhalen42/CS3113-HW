@@ -2,26 +2,41 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
+#include <vector>
 #include "main.h"
 
-SDL_Window* displayWindow;
+//SDL_Window* displayWindow;
 
 void drawNet() {
-	float net[8] = { -0.05, 1, -0.05, -1, 0.05, -1, 0.05, 1 };
+	float net[8] = { -0.025, 1, -0.025, -1, 0.025, -1, 0.025, 1 };
 	glVertexPointer(2, GL_FLOAT, 0, net);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glDrawArrays(GL_QUADS, 0, 4);
 };
 
+std::vector < Entity > Entities ;
+
+float paddleArray[8] = { -0.025, .1, -0.025, -.1, 0.025, -0.1, 0.025, 0.1 };
+float goalArray[8] = { -0.2, 1, -0.2, -1, 0.2, -1, 0.2, 1 };
+float ballArray[8] = { -0.05, 0.05, -0.05, -0.05, 0.05, -0.05, 0.05, 0.05 };
+
+Entity leftPaddle(paddleArray, -1.28, 0);
+Entity rightPaddle(paddleArray, 1.28, 0);
+Entity leftGoal(goalArray, -1.43, 0);
+Entity rightGoal(goalArray, 1.43, 0);
+Entity ball(ballArray, 0, 0);
+
+
 
 
 int main(int argc, char *argv[])
 {
-	SDL_Init(SDL_INIT_VIDEO);
-	displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
-	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
-	SDL_GL_MakeCurrent(displayWindow, context);
-
+	setup();
+	Entities.push_back(leftPaddle);
+	Entities.push_back(rightPaddle);
+	Entities.push_back(leftGoal);
+	Entities.push_back(rightGoal);
+	Entities.push_back(ball);
 	bool done = false;
 	
 	SDL_Event event;
@@ -31,8 +46,10 @@ int main(int argc, char *argv[])
 			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
 				done = true;
 			}
-			drawNet();
 		}
+		update(Entities);
+		draw(Entities);
+		drawNet();
 		SDL_GL_SwapWindow(displayWindow);
 	}
 
