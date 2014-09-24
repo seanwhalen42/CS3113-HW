@@ -21,10 +21,11 @@ GLuint LoadTexture(std::string image_path_str) {
 
 class Entity {
 public:
-	Entity(float array[], float x, float y, std::string texture = " "){
+	Entity(float array[], float x, float y, std::string texture = " "): x(x), y(y){
 		if (texture != " "){
 			texture = LoadTexture(texture);
 		}
+
 		//x = (array[1] + array[7]) / 2;
 		//y = (array[2] + array[4]) / 2;
 		
@@ -79,9 +80,9 @@ public:
 	}
 	void draw(){
 		glMatrixMode(GL_MODELVIEW);
+		glEnableClientState(GL_VERTEX_ARRAY);
 		glTranslatef(x, y, 0);
 		glVertexPointer(2, GL_FLOAT, 0, vertexArray);
-		glEnableClientState(GL_VERTEX_ARRAY);
 		glDrawArrays(GL_QUADS, 0, 4);
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glLoadIdentity();
@@ -140,5 +141,21 @@ void update(std::vector<Entity> Entities) {
 void draw(std::vector<Entity> Entities) {
 	for (Entity i : Entities){
 		i.draw();
+	}
+}
+
+void processEvents(Entity leftPaddle, Entity rightPaddle){
+	const Uint8 *keys = SDL_GetKeyboardState(NULL);
+	if (keys[SDL_SCANCODE_UP]){
+		rightPaddle.setDirection_y(1);
+	}
+	else if (keys[SDL_SCANCODE_DOWN]){
+		rightPaddle.setDirection_y(-1);
+	}
+	if (keys[SDL_SCANCODE_W]){
+		leftPaddle.setDirection_y(1);
+	}
+	else if (keys[SDL_SCANCODE_S]){
+		rightPaddle.setDirection_y(-1);
 	}
 }

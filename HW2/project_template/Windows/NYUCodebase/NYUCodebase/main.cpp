@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
 	Entities.push_back(leftGoal);
 	Entities.push_back(rightGoal);
 	Entities.push_back(ball);
+	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
 	bool done = false;
 	
 	SDL_Event event;
@@ -47,6 +48,7 @@ int main(int argc, char *argv[])
 				done = true;
 			}
 		}
+		glClear(GL_COLOR_BUFFER_BIT);
 		update(Entities);
 		draw(Entities);
 		drawNet();
