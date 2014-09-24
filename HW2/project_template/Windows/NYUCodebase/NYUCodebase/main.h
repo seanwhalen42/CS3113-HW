@@ -135,30 +135,30 @@ void setup() {
 	SDL_GL_MakeCurrent(displayWindow, context);
 };
 
-void update(std::vector<Entity> Entities) {
-	for (Entity i : Entities){
-		i.update();
+void update(std::vector<Entity*> &Entities) {
+	for (Entity* i : Entities){
+		i->update();
 	}
 }
 
-void draw(std::vector<Entity> Entities) {
-	for (Entity i : Entities){
-		i.draw();
+void draw(std::vector<Entity*> Entities) {
+	for (Entity* i : Entities){
+		i->draw();
 	}
 }
 
-void processEvents(Entity leftPaddle, Entity rightPaddle){
+void processEvents(Entity* leftPaddle, Entity* rightPaddle){
 	const Uint8 *keys = SDL_GetKeyboardState(NULL);
 	if (keys[SDL_SCANCODE_UP]){
-		rightPaddle.setDirection_y(1);
+		rightPaddle->setDirection_y(1);
 	}
 	else if (keys[SDL_SCANCODE_DOWN]){
-		rightPaddle.setDirection_y(-1);
+		rightPaddle->setDirection_y(-1);
 	}
 	if (keys[SDL_SCANCODE_W]){
-		leftPaddle.setDirection_y(1);
+		leftPaddle->setDirection_y(1);
 	}
 	else if (keys[SDL_SCANCODE_S]){
-		rightPaddle.setDirection_y(-1);
+		rightPaddle->setDirection_y(-1);
 	}
 }

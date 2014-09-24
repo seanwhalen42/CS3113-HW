@@ -14,7 +14,7 @@ void drawNet() {
 	glDrawArrays(GL_QUADS, 0, 4);
 };
 
-std::vector < Entity > Entities ;
+std::vector < Entity* > Entities ;
 
 float paddleArray[8] = { -0.025, .1, -0.025, -.1, 0.025, -0.1, 0.025, 0.1 };
 float goalArray[8] = { -0.2, 1, -0.2, -1, 0.2, -1, 0.2, 1 };
@@ -30,11 +30,11 @@ Entity ball(ballArray, 0, 0);
 int main(int argc, char *argv[])
 {
 	setup();
-	Entities.push_back(leftPaddle);
-	Entities.push_back(rightPaddle);
-	Entities.push_back(leftGoal);
-	Entities.push_back(rightGoal);
-	Entities.push_back(ball);
+	Entities.push_back(&leftPaddle);
+	Entities.push_back(&rightPaddle);
+	Entities.push_back(&leftGoal);
+	Entities.push_back(&rightGoal);
+	Entities.push_back(&ball);
 	glMatrixMode(GL_PROJECTION);
 	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
 	ball.setDirection_x(1);
