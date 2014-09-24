@@ -35,6 +35,9 @@ public:
 		for (int i = 0; i<8; i++){
 			vertexArray[i] = array[i];
 		}
+		speed = 1;
+		direction_x = 0;
+		direction_y = 0;
 	}
 
 	//Accessors

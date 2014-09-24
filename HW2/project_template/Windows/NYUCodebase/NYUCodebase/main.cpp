@@ -22,11 +22,9 @@ float ballArray[8] = { -0.05, 0.05, -0.05, -0.05, 0.05, -0.05, 0.05, 0.05 };
 
 Entity leftPaddle(paddleArray, -1.28, 0);
 Entity rightPaddle(paddleArray, 1.28, 0);
-Entity leftGoal(goalArray, -1.43, 0);
-Entity rightGoal(goalArray, 1.43, 0);
+Entity leftGoal(goalArray, -1.66, 0);
+Entity rightGoal(goalArray, 1.66, 0);
 Entity ball(ballArray, 0, 0);
-
-
 
 
 int main(int argc, char *argv[])
@@ -37,7 +35,10 @@ int main(int argc, char *argv[])
 	Entities.push_back(leftGoal);
 	Entities.push_back(rightGoal);
 	Entities.push_back(ball);
+	glMatrixMode(GL_PROJECTION);
 	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
+	ball.setDirection_x(1);
+	ball.setDirection_y(1);
 	bool done = false;
 	
 	SDL_Event event;
@@ -49,6 +50,7 @@ int main(int argc, char *argv[])
 			}
 		}
 		glClear(GL_COLOR_BUFFER_BIT);
+		processEvents(leftPaddle, rightPaddle);
 		update(Entities);
 		draw(Entities);
 		drawNet();
