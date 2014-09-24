@@ -100,12 +100,18 @@ public:
 		direction_y = newY;
 	}
 
-	void update() {
-		x += direction_x * speed;
-		y += direction_y * speed;
+	void update(float elapsed) {
+		x += direction_x * speed * elapsed;
+		y += direction_y * speed * elapsed;
 	}
 
-	
+	void bounceX() {
+		direction_x *= -1;
+	}
+
+	void bounceY() {
+		direction_y *= -1;
+	}
 
 private:
 	float x;
@@ -123,9 +129,9 @@ private:
 	float vertexArray[8];
 };
 
-bool collisionDetect(Entity entityA, Entity entityB) {
-	return (entityA.getBottom() >= entityB.getTop() || entityA.getTop() <= entityB.getBottom() || entityA.getLeft() >= entityB.getRight() ||
-		entityA.getRight() <= entityB.getLeft());
+bool collisionDetect(Entity* entityA, Entity* entityB) {
+	return (entityA->getBottom() >= entityB->getTop() || entityA->getTop() <= entityB->getBottom() || entityA->getLeft() >= entityB->getRight() ||
+		entityA->getRight() <= entityB->getLeft());
 }
 
 void setup() {
@@ -135,9 +141,9 @@ void setup() {
 	SDL_GL_MakeCurrent(displayWindow, context);
 };
 
-void update(std::vector<Entity*> &Entities) {
+void update(float elapsed, std::vector<Entity*> &Entities) {
 	for (Entity* i : Entities){
-		i->update();
+		i->update(elapsed);
 	}
 }
 
@@ -148,6 +154,8 @@ void draw(std::vector<Entity*> Entities) {
 }
 
 void processEvents(Entity* leftPaddle, Entity* rightPaddle){
+	leftPaddle->setDirection_y(0);
+	rightPaddle->setDirection_y(0);
 	const Uint8 *keys = SDL_GetKeyboardState(NULL);
 	if (keys[SDL_SCANCODE_UP]){
 		rightPaddle->setDirection_y(1);
@@ -159,6 +167,6 @@ void processEvents(Entity* leftPaddle, Entity* rightPaddle){
 		leftPaddle->setDirection_y(1);
 	}
 	else if (keys[SDL_SCANCODE_S]){
-		rightPaddle->setDirection_y(-1);
+		leftPaddle->setDirection_y(-1);
 	}
 }
