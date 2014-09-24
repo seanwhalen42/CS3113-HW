@@ -29,12 +29,6 @@ Entity topWall(wallArray, 0, 1.2);
 Entity bottomWall(wallArray, 0, -1.2);
 Entity ball(ballArray, 0, 0);
 
-void wallCollisionCheck(Entity* ball, Entity* topWall, Entity* bottomWall){
-	if (collisionDetect(ball, topWall) || collisionDetect(ball, bottomWall)){
-		ball->bounceY();
-	}
-}
-
 
 int main(int argc, char *argv[])
 {
@@ -50,7 +44,7 @@ int main(int argc, char *argv[])
 	glMatrixMode(GL_PROJECTION);;
 	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
 	ball.setDirection_x(sqrt(2)/2);
-	ball.setDirection_y(sqrt(2)/2);
+	ball.setDirection_y(-sqrt(2)/2);
 	bool done = false;
 	
 	SDL_Event event;
@@ -66,6 +60,8 @@ int main(int argc, char *argv[])
 		lastFrameTicks = ticks;
 		glClear(GL_COLOR_BUFFER_BIT);
 		processEvents(&leftPaddle, &rightPaddle);
+		wallCollisionCheck(&ball, &topWall, &bottomWall);
+		goalCollisionCheck(&ball, &leftGoal, &rightGoal);
 		update(elapsed, Entities);
 		draw(Entities);
 		drawNet();

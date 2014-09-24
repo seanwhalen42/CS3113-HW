@@ -113,6 +113,11 @@ public:
 		direction_y *= -1;
 	}
 
+	void reset() {
+		x = 0;
+		y = 0;
+	}
+
 private:
 	float x;
 	float y;
@@ -168,5 +173,24 @@ void processEvents(Entity* leftPaddle, Entity* rightPaddle){
 	}
 	else if (keys[SDL_SCANCODE_S]){
 		leftPaddle->setDirection_y(-1);
+	}
+}
+
+void wallCollisionCheck(Entity* ball, Entity* topWall, Entity* bottomWall){
+	if (collisionDetect(ball, topWall) || collisionDetect(ball, bottomWall)){
+		ball->bounceY();
+	}
+}
+
+void goalCollisionCheck(Entity* ball, Entity* leftGoal, Entity* rightGoal){
+	if (collisionDetect(ball, leftGoal)){
+		ball->reset();
+		ball->setDirection_x(-sqrt(2) / 2);
+		ball->setDirection_y(-sqrt(2) / 2);
+	}
+	else if (collisionDetect(ball, rightGoal)){
+		ball->reset();
+		ball->setDirection_x(sqrt(2) / 2);
+		ball->setDirection_y(-sqrt(2) / 2);
 	}
 }
