@@ -135,7 +135,7 @@ private:
 };
 
 bool collisionDetect(Entity* entityA, Entity* entityB) {
-	return (entityA->getBottom() >= entityB->getTop() || entityA->getTop() <= entityB->getBottom() || entityA->getLeft() >= entityB->getRight() ||
+	return !(entityA->getBottom() >= entityB->getTop() || entityA->getTop() <= entityB->getBottom() || entityA->getLeft() >= entityB->getRight() ||
 		entityA->getRight() <= entityB->getLeft());
 }
 
