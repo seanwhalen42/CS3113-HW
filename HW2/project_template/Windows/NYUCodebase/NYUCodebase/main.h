@@ -25,9 +25,6 @@ public:
 		if (texture != " "){
 			texture = LoadTexture(texture);
 		}
-
-		//x = (array[1] + array[7]) / 2;
-		//y = (array[2] + array[4]) / 2;
 		
 		width = array[3] - array[1];
 		height = array[2] - array[4];
