@@ -18,11 +18,7 @@ GLuint LoadTexture(std::string image_path_str) {
 
 class Entity {
 public:
-	Entity(float array[], float x, float y, std::string texture = " ") : x(x), y(y){
-		if (texture != " "){
-			texture = LoadTexture(texture);
-		}
-
+	Entity(float array[], float x, float y, SheetSprite sprite) : x(x), y(y){
 		width = array[3] - array[1];
 		height = array[2] - array[4];
 
@@ -75,7 +71,7 @@ public:
 		float right = (x + (width / 2));
 		return right;
 	}
-	void draw(){
+	void Render(){
 		glMatrixMode(GL_MODELVIEW);
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glTranslatef(x, y, 0);
@@ -94,7 +90,7 @@ public:
 		direction_y = newY;
 	}
 
-	void update(float elapsed) {
+	void Update(float elapsed) {
 		x += direction_x * speed * elapsed;
 		y += direction_y * speed * elapsed;
 	}
@@ -117,7 +113,7 @@ private:
 	float y;
 	float rotation;
 
-	GLuint textureID;
+	SheetSprite sprite;
 	float width;
 	float height;
 

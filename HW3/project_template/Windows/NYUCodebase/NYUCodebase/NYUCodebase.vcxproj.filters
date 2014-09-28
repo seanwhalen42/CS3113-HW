@@ -29,5 +29,8 @@
     <ClInclude Include="Entity.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,7 +6,7 @@ class SheetSprite {
 public:
 	SheetSprite();
 	SheetSprite(unsigned int textureID, float u, float v, float width, float height);
-	void Draw(float scale);
+	void Draw(float x, float y, float scale);
 private:
 	float scale;
 	unsigned int textureID;
