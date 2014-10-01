@@ -3,12 +3,15 @@
 #include <SDL_opengl.h>
 #include <SDL_image.h>
 #include <vector>
+#include <string>
 #include "ClassDemoApp.h"
 #include "sprite.h"
 #include "Entity.h"
 #include "Bullet.h"
 
 SDL_Window* displayWindow;
+GLuint sheet = LoadTexture("sheet.png");
+SheetSprite blueLaser(sheet, 856.0/1024.0, 869.0/1024.0, 9.0/1024.0, 57.0/1024.0);
 std::vector<Entity> bullets;
 
 ClassDemoApp::ClassDemoApp() {
@@ -40,6 +43,14 @@ void ClassDemoApp::Update(float elapsed) {
 		if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
 			done = true;
 		}
+	}
+	switch (state) {
+	case STATE_MAIN_MENU:
+		//UpdateMainMenu();
+		break;
+	case STATE_GAME_LEVEL:
+		//UpdateGameLevel();
+		break;
 	}
 }
 
@@ -81,8 +92,15 @@ void Bullet::Draw(){
 	glLoadIdentity();
 }
 
-void fireBullet(float x, float y, float direction_y){
-	Entity newBullet;
+//bulletArray MAKE THIS
+
+void fireBullet(float x, float y, float direction_y, Entity* shooter){
+	Entity newBullet(bulletArray, shooter->getX(), shooter->getY(), );
+	bullets.push_back(newBullet);
+}
+
+bool shouldRemoveBullet(Entity bullet){
+	return (bullet.getY() > 1 || bullet.getY() < 0);
 }
 
 enum GameState { STATE_MAIN_MENU, STATE_GAME_LEVEL };

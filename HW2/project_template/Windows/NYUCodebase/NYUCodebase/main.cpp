@@ -43,8 +43,8 @@ int main(int argc, char *argv[])
 	Entities.push_back(&bottomWall);
 	glMatrixMode(GL_PROJECTION);;
 	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
-	ball.setDirection_x(sqrt(2)/2);
-	ball.setDirection_y(-sqrt(2)/2);
+	ball.setDirection_x(1);
+	ball.setDirection_y(0);
 	bool done = false;
 	
 	SDL_Event event;
@@ -62,6 +62,7 @@ int main(int argc, char *argv[])
 		processEvents(&leftPaddle, &rightPaddle);
 		wallCollisionCheck(&ball, &topWall, &bottomWall);
 		goalCollisionCheck(&ball, &leftGoal, &rightGoal);
+		paddleCollisionCheck(&ball, &leftPaddle, &rightPaddle);
 		update(elapsed, Entities);
 		draw(Entities);
 		drawNet();

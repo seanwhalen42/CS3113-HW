@@ -19,8 +19,8 @@ GLuint LoadTexture(std::string image_path_str) {
 class Entity {
 public:
 	Entity(float array[], float x, float y, SheetSprite sprite) : x(x), y(y){
-		width = array[3] - array[1];
-		height = array[2] - array[4];
+		//width = array[3] - array[1]; FIX
+		//height = array[2] - array[4];THIS
 
 		for (int i = 0; i<8; i++){
 			vertexArray[i] = array[i];
@@ -72,13 +72,7 @@ public:
 		return right;
 	}
 	void Render(){
-		glMatrixMode(GL_MODELVIEW);
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glTranslatef(x, y, 0);
-		glVertexPointer(2, GL_FLOAT, 0, vertexArray);
-		glDrawArrays(GL_QUADS, 0, 4);
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glLoadIdentity();
+		sprite.Draw(); //put arguments in.
 	}
 	//Mutators
 

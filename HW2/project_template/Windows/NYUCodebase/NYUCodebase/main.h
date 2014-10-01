@@ -3,6 +3,9 @@
 #include <SDL_image.h>
 #include <string>
 #include <vector>
+#include <cmath>
+#include <windows.h>
+#include <sstream>
 
 SDL_Window* displayWindow;
 
@@ -26,8 +29,8 @@ public:
 			texture = LoadTexture(texture);
 		}
 		
-		width = array[3] - array[1];
-		height = array[2] - array[4];
+		width = array[6] - array[0];
+		height = array[1] - array[3];
 
 		for (int i = 0; i<8; i++){
 			vertexArray[i] = array[i];
@@ -132,8 +135,12 @@ private:
 };
 
 bool collisionDetect(Entity* entityA, Entity* entityB) {
+	//std::ostringstream debugStream;
+	//debugStream << "Entity A: " << entityA->getBottom() << " " << entityA->getTop() << " " << entityA->getLeft() << " " << entityA->getRight() << std::endl;
+	//OutputDebugStringA(debugStream.str().c_str());
 	return !(entityA->getBottom() >= entityB->getTop() || entityA->getTop() <= entityB->getBottom() || entityA->getLeft() >= entityB->getRight() ||
 		entityA->getRight() <= entityB->getLeft());
+
 }
 
 void setup() {
@@ -182,12 +189,28 @@ void wallCollisionCheck(Entity* ball, Entity* topWall, Entity* bottomWall){
 void goalCollisionCheck(Entity* ball, Entity* leftGoal, Entity* rightGoal){
 	if (collisionDetect(ball, leftGoal)){
 		ball->reset();
-		ball->setDirection_x(-sqrt(2) / 2);
-		ball->setDirection_y(-sqrt(2) / 2);
+		ball->setDirection_x(-1);
+		ball->setDirection_y(0);
 	}
 	else if (collisionDetect(ball, rightGoal)){
 		ball->reset();
-		ball->setDirection_x(sqrt(2) / 2);
-		ball->setDirection_y(-sqrt(2) / 2);
+		ball->setDirection_x(1);
+		ball->setDirection_y(0);
+	}
+}
+
+void paddleCollisionCheck(Entity* ball, Entity* leftPaddle, Entity* rightPaddle){
+	if (collisionDetect(ball, leftPaddle)){
+		float diff = (ball->getY() - leftPaddle->getY()) / 0.15;//difference should be between -1 and 1
+		float angle = (60 * diff)*(M_PI / 180);
+		ball->setDirection_x(cos(angle));
+		ball->setDirection_y(sin(angle));
+	}
+
+	else if (collisionDetect(ball, rightPaddle)){
+		float diff = (ball->getY() - rightPaddle->getY()) / 0.15;//difference should be between -1 and 1
+		float angle = (60 * diff)*(M_PI / 180);
+		ball->setDirection_x(-cos(angle));
+		ball->setDirection_y(sin(angle));
 	}
 }
