@@ -6,7 +6,7 @@
 
 class Entity {
 public:
-	Entity(float array[], float x, float y, SheetSprite sprite);
+	Entity(float array[], float x, float y, float speed, SheetSprite sprite);
 
 	//Accessors
 
@@ -19,6 +19,10 @@ public:
 	float getWidth();
 
 	float getSpeed();
+
+	bool getVisible();
+
+	bool getCollide();
 
 	float getTop();
 
@@ -38,6 +42,10 @@ public:
 
 	void update(float elapsed);
 
+	void setCollide(bool c);
+
+	void setVisible(bool v);
+
 	void bounceX();
 
 	void bounceY();
@@ -56,6 +64,9 @@ private:
 	float speed;
 	float direction_x;
 	float direction_y;
+
+	bool isVisible;
+	bool collides;
 
 	float vertexArray[8];
 };

@@ -5,16 +5,17 @@
 #include "Entity.h"
 #include "SheetSprite.h"
 
-Entity::Entity(float array[], float x, float y, SheetSprite sprite) : x(x), y(y){
+Entity::Entity(float array[], float x, float y, float speed, SheetSprite sprite) : x(x), y(y), speed(speed){
 	width = array[6] - array[0];
 	height = array[1] - array[3];
 
 	for (int i = 0; i<8; i++){
 		vertexArray[i] = array[i];
 	}
-	speed = 1;
 	direction_x = 0;
 	direction_y = 0;
+	isVisible = true;
+	collides = true;
 }
 
 float Entity::getX(){
@@ -35,6 +36,14 @@ float Entity::getWidth() {
 
 float Entity::getSpeed() {
 	return speed;
+}
+
+bool Entity::getVisible(){
+	return isVisible;
+}
+
+bool Entity::getCollide(){
+	return collides;
 }
 
 float Entity::getTop() {
@@ -58,7 +67,9 @@ float Entity::getRight(){
 }
 
 void Entity::draw(float scale){
-	sprite.Draw(x, y, scale);
+	if (isVisible){
+		sprite.Draw(x, y, scale);
+	}
 }
 
 void Entity::setDirection_x(float newX){
@@ -67,6 +78,14 @@ void Entity::setDirection_x(float newX){
 
 void Entity::setDirection_y(float newY){
 	direction_y = newY;
+}
+
+void Entity::setCollide(bool c){
+	collides = c;
+}
+
+void Entity::setVisible(bool v){
+	isVisible = v;
 }
 
 void Entity::bounceX(){
@@ -80,4 +99,14 @@ void Entity::bounceY(){
 void Entity::reset(){
 	x = 0;
 	y = 0;
+}
+
+bool collisionDetect(Entity* entityA, Entity* entityB) {
+	if (entityA->getCollide() && entityB->getCollide()){
+		return !(entityA->getBottom() >= entityB->getTop() || entityA->getTop() <= entityB->getBottom() || entityA->getLeft() >= entityB->getRight() ||
+			entityA->getRight() <= entityB->getLeft());
+	}
+	else {
+		return false;
+	}
 }

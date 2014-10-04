@@ -135,12 +135,8 @@ private:
 };
 
 bool collisionDetect(Entity* entityA, Entity* entityB) {
-	//std::ostringstream debugStream;
-	//debugStream << "Entity A: " << entityA->getBottom() << " " << entityA->getTop() << " " << entityA->getLeft() << " " << entityA->getRight() << std::endl;
-	//OutputDebugStringA(debugStream.str().c_str());
 	return !(entityA->getBottom() >= entityB->getTop() || entityA->getTop() <= entityB->getBottom() || entityA->getLeft() >= entityB->getRight() ||
 		entityA->getRight() <= entityB->getLeft());
-
 }
 
 void setup() {

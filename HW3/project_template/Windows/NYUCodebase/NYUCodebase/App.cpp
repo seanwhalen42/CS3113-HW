@@ -24,7 +24,9 @@ ClassDemoApp::~ClassDemoApp() {
 }
 
 void ClassDemoApp::Render() {
-	// render stuff
+	for (Entity* entity : entities){
+		entity->draw(1.0f);
+	}
 	SDL_GL_SwapWindow(displayWindow);
 }
 
@@ -43,4 +45,12 @@ bool ClassDemoApp::UpdateAndRender() {
 	Update(elapsed);
 	Render();
 	return done;
+}
+
+void ClassDemoApp::killEntity(Entity* entity){
+	for (Entity* entityPtr : entities){
+		if (entityPtr == entity){
+			entityPtr == NULL;
+		}
+	}
 }
