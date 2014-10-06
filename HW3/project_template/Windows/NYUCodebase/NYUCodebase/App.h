@@ -22,6 +22,9 @@ private:
 	bool done;
 	float lastFrameTicks;
 	SDL_Window* displayWindow;
+	SheetSprite playerSprite;
+	SheetSprite enemySprite;
+	SheetSprite bulletSprite;
 	Entity* player;
 	std::vector<Entity*> enemies;
 	std::vector<Entity*> bullets;

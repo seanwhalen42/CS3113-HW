@@ -5,7 +5,7 @@
 class SheetSprite {
 public:
 	SheetSprite();
-	SheetSprite(unsigned int textureID, float u, float v, float width, float height);
+	SheetSprite(GLuint textureID, float u, float v, float width, float height);
 	void Draw(float x, float y, float scale);
 	unsigned int getTextureID();
 	float getU();

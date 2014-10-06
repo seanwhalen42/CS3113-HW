@@ -5,6 +5,11 @@
 #include "SheetSprite.h"
 #include "App.h"
 
+GLuint sheet = ClassDemoApp::LoadTexture("sheet.png");
+SheetSprite playerSprite = SheetSprite(sheet, 224.0f, 832.0f, 99.0f, 75.0f);
+SheetSprite enemySprite = SheetSprite(sheet, 144.0f, 156.0f, 103.0f, 84.0f);
+SheetSprite bulletSprite = SheetSprite(sheet, 856.0f, 869.0f, 9.0f, 57.0f);
+
 ClassDemoApp::ClassDemoApp() {
 	Init();
 	done = false;

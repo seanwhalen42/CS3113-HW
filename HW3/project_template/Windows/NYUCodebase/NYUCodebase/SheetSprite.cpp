@@ -7,7 +7,7 @@ SheetSprite::SheetSprite(){
 
 }
 
-SheetSprite::SheetSprite(unsigned int textureID, float u, float v, float width, float height) : textureID(textureID), u(u), v(v), width(width), height(height) {
+SheetSprite::SheetSprite(GLuint textureID, float u, float v, float width, float height) : textureID(textureID), u(u), v(v), width(width), height(height) {
 
 }
 
