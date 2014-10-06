@@ -104,12 +104,3 @@ void Entity::reset(){
 	y = 0;
 }
 
-bool collisionDetect(Entity* entityA, Entity* entityB) {
-	if (entityA->getCollide() && entityB->getCollide()){
-		return !(entityA->getBottom() >= entityB->getTop() || entityA->getTop() <= entityB->getBottom() || entityA->getLeft() >= entityB->getRight() ||
-			entityA->getRight() <= entityB->getLeft());
-	}
-	else {
-		return false;
-	}
-}

@@ -1,3 +1,4 @@
+#pragma once
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
@@ -11,13 +12,15 @@ public:
 	ClassDemoApp();
 	~ClassDemoApp();
 	void Init();
-	void processEvents(Entity* player);
+	void processEvents();
 	bool UpdateAndRender();
 	void Render();
 	void Update(float elapsed);
 	void killEntity(Entity* entity);
 	void fireBullet(Entity* shooter);
+	bool shouldRemove(Entity* bullet);
 	GLuint LoadTexture(std::string image_path_str);
+	bool collisionDetect(Entity* entityA, Entity* entityB);
 private:
 	bool done;
 	float lastFrameTicks;
@@ -28,4 +31,5 @@ private:
 	Entity* player;
 	std::vector<Entity*> enemies;
 	std::vector<Entity*> bullets;
+	enum gameState;
 };
