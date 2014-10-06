@@ -6,7 +6,7 @@
 
 class Entity {
 public:
-	Entity(float array[], float x, float y, float speed, SheetSprite sprite);
+	Entity(/*float array[],*/ float x, float y, float speed, SheetSprite sprite);
 
 	//Accessors
 
@@ -68,5 +68,5 @@ private:
 	bool isVisible;
 	bool collides;
 
-	float vertexArray[8];
+	//float vertexArray[8];
 };

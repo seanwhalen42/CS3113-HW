@@ -23,9 +23,24 @@ ClassDemoApp::~ClassDemoApp() {
 	SDL_Quit();
 }
 
+void ClassDemoApp::processEvents(Entity* player){
+	player->setDirection_x(0);
+	const Uint8 *keys = SDL_GetKeyboardState(NULL);
+	if (keys[SDL_SCANCODE_LEFT]){
+		player->setDirection_x(-1);
+	}
+	else if (keys[SDL_SCANCODE_RIGHT]){
+		player->setDirection_x(1);
+	}
+}
+
 void ClassDemoApp::Render() {
-	for (Entity* entity : entities){
+	player->draw(1.0f);
+	for (Entity* entity : enemies){
 		entity->draw(1.0f);
+	}
+	for (Entity* bullet : bullets){
+		bullet->draw(1.0f);
 	}
 	SDL_GL_SwapWindow(displayWindow);
 }
@@ -49,9 +64,26 @@ bool ClassDemoApp::UpdateAndRender() {
 }
 
 void ClassDemoApp::killEntity(Entity* entity){
-	for (Entity* entityPtr : entities){
+	for (Entity* entityPtr : enemies){
 		if (entityPtr == entity){
 			entityPtr == NULL;
 		}
 	}
+}
+
+void ClassDemoApp::fireBullet(Entity* shooter){
+	Entity newBullet();
+}
+
+GLuint ClassDemoApp::LoadTexture(std::string image_path_str){
+	const char* image_path = image_path_str.c_str();
+	SDL_Surface *surface = IMG_Load(image_path);
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glTexImage2D(GL_TEXTURE_2D, 0, 4, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	SDL_FreeSurface(surface);
+	return textureID;
 }
