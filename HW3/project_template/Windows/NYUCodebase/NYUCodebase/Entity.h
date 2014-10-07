@@ -7,7 +7,9 @@
 
 class Entity {
 public:
-	Entity(/*float array[],*/ float x, float y, float speed, SheetSprite sprite);
+	Entity();
+
+	Entity(float x, float y, float speed, SheetSprite sprite);
 
 	//Accessors
 

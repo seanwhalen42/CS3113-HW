@@ -5,16 +5,14 @@
 #include "Entity.h"
 #include "SheetSprite.h"
 
-Entity::Entity(/*float array[],*/ float x, float y, float speed, SheetSprite sprite) : x(x), y(y), speed(speed){
-	//width = array[6] - array[0];
-	//height = array[1] - array[3];
+Entity::Entity(){}
+
+Entity::Entity(float x, float y, float speed, SheetSprite sprite) : x(x), y(y), speed(speed), sprite(sprite){
 
 	width = sprite.getWidth();
 	height = sprite.getHeight();
 
-	/*for (int i = 0; i<8; i++){
-		vertexArray[i] = array[i];
-	}*/
+
 	direction_x = 0;
 	direction_y = 0;
 	isVisible = true;

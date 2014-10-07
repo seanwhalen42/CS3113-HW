@@ -28,7 +28,7 @@ private:
 	SheetSprite playerSprite;
 	SheetSprite enemySprite;
 	SheetSprite bulletSprite;
-	Entity* player;
+	Entity player;
 	std::vector<Entity*> enemies;
 	std::vector<Entity*> bullets;
 	enum gameState{STATE_TITLE_SCREEN, STATE_GAME, STATE_GAME_OVER};

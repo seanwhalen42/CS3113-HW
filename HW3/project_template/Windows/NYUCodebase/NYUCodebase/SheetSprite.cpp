@@ -8,7 +8,7 @@ SheetSprite::SheetSprite(){
 }
 
 SheetSprite::SheetSprite(GLuint textureID, float u, float v, float width, float height) : textureID(textureID), u(u), v(v), width(width), height(height) {
-
+	scale = 1;
 }
 
 void SheetSprite::Draw(float x, float y, float scale) {
@@ -22,7 +22,7 @@ void SheetSprite::Draw(float x, float y, float scale) {
 	glLoadIdentity();
 	glTranslatef(x, y, 0);
 	glVertexPointer(2, GL_FLOAT, 0, quad);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	//glEnableClientState(GL_TEXTURE_COORD_ARRAY); // this is also broken: See slides #3
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDrawArrays(GL_QUADS, 0, 4);

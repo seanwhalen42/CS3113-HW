@@ -23,11 +23,10 @@ void ClassDemoApp::Init() {
 	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
 	glMatrixMode(GL_MODELVIEW);
 	GLuint sheet = ClassDemoApp::LoadTexture("sheet.png");
-	playerSprite = SheetSprite(sheet, 224.0f/*u*/, 832.0f/*v*/, 99.0f/*width*/, 75.0f/*height*/);
+	playerSprite = SheetSprite(sheet, 224.0f/*u*/, 832.0f/*v*/, 99.0f/*width*/, 75.0f/*height*/);//this is wrong. These sizes ARE TOO BIG
 	enemySprite = SheetSprite(sheet, 144.0f, 156.0f, 103.0f, 84.0f);
 	bulletSprite = SheetSprite(sheet, 856.0f, 869.0f, 9.0f, 57.0f);
-	Entity playerEntity = Entity(-0.8f, 0.0f, 1, playerSprite);
-	player = &playerEntity;
+	player = Entity(-0.8f, 0.0f, 1, playerSprite);
 	for (int i = 0; i < 2; i++){
 		for (int j = 0; j < 5; j++){
 			Entity enemyEntity = Entity((j*0.5) - 1, 0.8 - i*0.26, 1, enemySprite);
@@ -41,19 +40,19 @@ ClassDemoApp::~ClassDemoApp() {
 }
 
 void ClassDemoApp::processEvents(){
-	player->setDirection_x(0);
+	player.setDirection_x(0);
 	const Uint8 *keys = SDL_GetKeyboardState(NULL);
 	if (keys[SDL_SCANCODE_LEFT]){
-		player->setDirection_x(-1);
+		player.setDirection_x(-1);
 	}
 	else if (keys[SDL_SCANCODE_RIGHT]){
-		player->setDirection_x(1);
+		player.setDirection_x(1);
 	}
 	else if (keys[SDL_SCANCODE_SPACE]){
-		fireBullet(player);
+		fireBullet(&player);
 	}
 	for (Entity* enemy : enemies){
-		if (rand() % 100 == 0){//emeies should fire about once every two seconds
+		if (rand() % 100 == 0){//enemies should fire about once every two seconds
 			fireBullet(enemy);
 		}
 		for (Entity* bullet : bullets){
@@ -65,7 +64,7 @@ void ClassDemoApp::processEvents(){
 }
 
 void ClassDemoApp::Render() {
-	player->draw(1.0f);
+	player.draw(1.0f);
 	for (Entity* entity : enemies){
 		entity->draw(1.0f);
 	}
@@ -103,7 +102,7 @@ void ClassDemoApp::killEntity(Entity* entity){
 }
 
 void ClassDemoApp::fireBullet(Entity* shooter){
-	if (shooter == player){
+	if (shooter == &player){
 		Entity newBullet(shooter->getX(), shooter->getTop() + (1/600), 2, bulletSprite);
 		newBullet.setDirection_x(0);
 		newBullet.setDirection_y(1);
