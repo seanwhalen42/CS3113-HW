@@ -19,6 +19,9 @@ void ClassDemoApp::Init() {
 		SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
 	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
 	SDL_GL_MakeCurrent(displayWindow, context);
+	glMatrixMode(GL_PROJECTION);
+	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
+	glMatrixMode(GL_MODELVIEW);
 	GLuint sheet = ClassDemoApp::LoadTexture("sheet.png");
 	playerSprite = SheetSprite(sheet, 224.0f/*u*/, 832.0f/*v*/, 99.0f/*width*/, 75.0f/*height*/);
 	enemySprite = SheetSprite(sheet, 144.0f, 156.0f, 103.0f, 84.0f);

@@ -19,11 +19,15 @@ void SheetSprite::Draw(float x, float y, float scale) {
 	GLfloat quadUVs[] = { u, v, u, v + height, u + width, v + height, u + width, v };
 	glMatrixMode(GL_MODELVIEW);
 	glEnableClientState(GL_VERTEX_ARRAY);
+	glLoadIdentity();
 	glTranslatef(x, y, 0);
 	glVertexPointer(2, GL_FLOAT, 0, quad);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDrawArrays(GL_QUADS, 0, 4);
+	glDisable(GL_TEXTURE_2D);
 	glDisableClientState(GL_VERTEX_ARRAY);
-	glLoadIdentity();
 }
 
 float SheetSprite::getU(){
