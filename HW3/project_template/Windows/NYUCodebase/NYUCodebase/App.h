@@ -31,5 +31,5 @@ private:
 	Entity* player;
 	std::vector<Entity*> enemies;
 	std::vector<Entity*> bullets;
-	enum gameState;
+	enum gameState{STATE_TITLE_SCREEN, STATE_GAME, STATE_GAME_OVER};
 };

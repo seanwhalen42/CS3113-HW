@@ -6,6 +6,7 @@
 #include "Entity.h"
 #include "SheetSprite.h"
 
+
 class ClassDemoApp {
 public:
 	ClassDemoApp();
@@ -25,4 +26,5 @@ private:
 	Entity* player;
 	std::vector<Entity*> enemies;
 	std::vector<Entity*> bullets;
+	enum gameState;
 };

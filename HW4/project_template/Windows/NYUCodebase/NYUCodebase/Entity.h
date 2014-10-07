@@ -3,10 +3,14 @@
 #include <SDL_image.h>
 #include <string>
 #include "SheetSprite.h"
+// 60 FPS (1.0f/60.0f)
+#define FIXED_TIMESTEP 0.0166666f
+#define MAX_TIMESTEPS 6
+float timeLeftOver = 0.0f;
 
 class Entity {
 public:
-	Entity(/*float array[],*/ float x, float y, float speed, SheetSprite sprite);
+	Entity(float x, float y, SheetSprite sprite);
 
 	//Accessors
 
@@ -17,8 +21,6 @@ public:
 	float getHeight();
 
 	float getWidth();
-
-	float getSpeed();
 
 	bool getVisible();
 
@@ -36,9 +38,9 @@ public:
 
 	//Mutators
 
-	void setDirection_x(float newX);
+	void setVelocity_x(float newX);
 
-	void setDirection_y(float newY);
+	void setVelocity_y(float newY);
 
 	void update(float elapsed);
 

@@ -5,18 +5,19 @@
 #include "Entity.h"
 #include "SheetSprite.h"
 
-Entity::Entity(/*float array[],*/ float x, float y, float speed, SheetSprite sprite) : x(x), y(y), speed(speed){
-	//width = array[6] - array[0];
-	//height = array[1] - array[3];
+float lerp(float v0, float v1, float t) {
+	return (1.0 - t)*v0 + t*v1;
+}
+
+Entity::Entity(float x, float y, SheetSprite sprite) : x(x), y(y) {
 
 	width = sprite.getWidth();
 	height = sprite.getHeight();
 
-	/*for (int i = 0; i<8; i++){
-	vertexArray[i] = array[i];
-	}*/
-	direction_x = 0;
-	direction_y = 0;
+	velocity_x = 0;
+	velocity_y = 0;
+	acceleration_x = 0;
+	acceleration_y = -9.8; //Gravity
 	isVisible = true;
 	collides = true;
 }
@@ -35,10 +36,6 @@ float Entity::getHeight() {
 
 float Entity::getWidth() {
 	return width;
-}
-
-float Entity::getSpeed() {
-	return speed;
 }
 
 bool Entity::getVisible(){
@@ -75,12 +72,21 @@ void Entity::draw(float scale){
 	}
 }
 
-void Entity::setDirection_x(float newX){
-	direction_x = newX;
+void Entity::setVelocity_x(float newX){
+	velocity_x = newX;
 }
 
-void Entity::setDirection_y(float newY){
-	direction_y = newY;
+void Entity::setVelocity_y(float newY){
+	velocity_y = newY;
+}
+
+void Entity::update(float elapsed){
+	x += velocity_x * elapsed;
+	y += velocity_y * elapsed;
+	velocity_x += acceleration_x * elapsed;
+	velocity_y += acceleration_y * elapsed;
+	velocity_x = lerp(velocity_x, 0.0f, elapsed * friction_x);
+	velocity_y = lerp(velocity_y, 0.0f, elapsed * friction_y);
 }
 
 void Entity::setCollide(bool c){
@@ -92,11 +98,11 @@ void Entity::setVisible(bool v){
 }
 
 void Entity::bounceX(){
-	direction_x *= -1;
+	velocity_x *= -1;
 }
 
 void Entity::bounceY(){
-	direction_y *= -1;
+	velocity_y *= -1;
 }
 
 void Entity::reset(){
