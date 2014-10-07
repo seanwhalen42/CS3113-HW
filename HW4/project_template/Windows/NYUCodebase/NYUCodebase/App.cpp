@@ -23,26 +23,7 @@ ClassDemoApp::~ClassDemoApp() {
 	SDL_Quit();
 }
 
-void ClassDemoApp::processEvents(Entity* player){
-	player->setDirection_x(0);
-	const Uint8 *keys = SDL_GetKeyboardState(NULL);
-	if (keys[SDL_SCANCODE_LEFT]){
-		player->setDirection_x(-1);
-	}
-	else if (keys[SDL_SCANCODE_RIGHT]){
-		player->setDirection_x(1);
-	}
-}
-
 void ClassDemoApp::Render() {
-	player->draw(1.0f);
-	for (Entity* entity : enemies){
-		entity->draw(1.0f);
-	}
-	for (Entity* bullet : bullets){
-		bullet->draw(1.0f);
-	}
-	SDL_GL_SwapWindow(displayWindow);
 }
 
 void ClassDemoApp::Update(float elapsed) {
