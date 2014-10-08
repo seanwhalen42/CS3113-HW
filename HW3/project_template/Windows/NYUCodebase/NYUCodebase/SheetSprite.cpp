@@ -14,15 +14,20 @@ SheetSprite::SheetSprite(GLuint textureID, float u, float v, float width, float 
 void SheetSprite::Draw(float x, float y, float scale) {
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, textureID);
-	GLfloat quad[] = { -width * scale, height * scale, -width * scale, -height * scale,
-	width * scale, -height * scale, width * scale, height * scale };
-	GLfloat quadUVs[] = { u, v, u, v + height, u + width, v + height, u + width, v };
 	glMatrixMode(GL_MODELVIEW);
-	glEnableClientState(GL_VERTEX_ARRAY);
+
 	glLoadIdentity();
 	glTranslatef(x, y, 0);
+
+	GLfloat quad[] = { -width * scale, height * scale, -width * scale, -height * scale,
+	width * scale, -height * scale, width * scale, height * scale };
 	glVertexPointer(2, GL_FLOAT, 0, quad);
-	//glEnableClientState(GL_TEXTURE_COORD_ARRAY); // this is also broken: See slides #3
+	glEnableClientState(GL_VERTEX_ARRAY);
+	
+	GLfloat quadUVs[] = { u, v, u, v + height, u + width, v + height, u + width, v };
+	
+	glTexCoordPointer(2, GL_FLOAT, 0, quadUVs);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY); // this is also broken: See slides #3
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDrawArrays(GL_QUADS, 0, 4);

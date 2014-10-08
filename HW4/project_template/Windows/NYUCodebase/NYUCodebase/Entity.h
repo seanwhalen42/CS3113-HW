@@ -1,68 +1,33 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
-#include <string>
 #include "SheetSprite.h"
-// 60 FPS (1.0f/60.0f)
-#define FIXED_TIMESTEP 0.0166666f
-#define MAX_TIMESTEPS 6
-float timeLeftOver = 0.0f;
 
-class Entity {
-public:
-	Entity(float x, float y, SheetSprite sprite);
+class Entity{
+	//Constructors
+	Entity();
+	Entity(float x, float y, float mass, SheetSprite sprite);
+	~Entity();
 
 	//Accessors
-
 	float getX();
-
 	float getY();
-
-	float getHeight();
-
-	float getWidth();
-
-	bool getVisible();
-
-	bool getCollide();
-
-	float getTop();
-
-	float getBottom();
-
-	float getLeft();
-
-	float getRight();
-
-	void draw(float scale);
+	void update();
+	void draw();
 
 	//Mutators
-
 	void setVelocity_x(float newX);
-
 	void setVelocity_y(float newY);
-
-	void update(float elapsed);
-
-	void setCollide(bool c);
-
-	void setVisible(bool v);
-
-	void bounceX();
-
-	void bounceY();
-
+	void setAcceleration_x(float newX);
+	void setAcceleration_y(float newY);
 	void reset();
 
 private:
+	//Position
 	float x;
 	float y;
-	float rotation;
 
-	SheetSprite sprite;
-	float width;
-	float height;
-
+	//Physics
 	float velocity_x;
 	float velocity_y;
 	float acceleration_x;
@@ -70,14 +35,12 @@ private:
 	float friction_x;
 	float friction_y;
 	float mass;
-	bool collidedTop;
-	bool collidedBottom;
-	bool collidedLeft;
-	bool collidedRight;
 
-	bool isVisible;
-	bool collides;
-	bool isStatic;
+	//Collision Flags
+	bool collidingTop;
+	bool collidingBottom;
+	bool collidingLeft;
+	bool collidingRight;
 
-	//float vertexArray[8];
+	SheetSprite sprite;
 };

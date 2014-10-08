@@ -2,10 +2,11 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
+#include "App.h"
 
 SDL_Window* displayWindow;
 
-int main(int argc, char *argv[])
+/*int main(int argc, char *argv[])
 {
 	SDL_Init(SDL_INIT_VIDEO);
 	displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
@@ -26,5 +27,14 @@ int main(int argc, char *argv[])
 	}
 
 	SDL_Quit();
+	return 0;
+}*/
+
+
+
+int main(int argc, char *argv[])
+{
+	ClassDemoApp app;
+	while (!app.UpdateAndRender()) {}
 	return 0;
 }

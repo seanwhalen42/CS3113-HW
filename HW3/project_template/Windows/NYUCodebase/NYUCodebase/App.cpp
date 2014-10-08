@@ -23,9 +23,9 @@ void ClassDemoApp::Init() {
 	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
 	glMatrixMode(GL_MODELVIEW);
 	GLuint sheet = ClassDemoApp::LoadTexture("sheet.png");
-	playerSprite = SheetSprite(sheet, 224.0f/*u*/, 832.0f/*v*/, 99.0f/*width*/, 75.0f/*height*/);//this is wrong. These sizes ARE TOO BIG
-	enemySprite = SheetSprite(sheet, 144.0f, 156.0f, 103.0f, 84.0f);
-	bulletSprite = SheetSprite(sheet, 856.0f, 869.0f, 9.0f, 57.0f);
+	playerSprite = SheetSprite(sheet, 224.0f/1024.0f/*u*/, 832.0f/1024.0f/*v*/, 99.0f/1024.0f/*width*/, 75.0f/1024.0f/*height*/);
+	enemySprite = SheetSprite(sheet, 144.0f/1024.0f, 156.0f/1024.0f, 103.0f/1024.0f, 84.0f/1024.0f);
+	bulletSprite = SheetSprite(sheet, 856.0f / 1024.0f, 869.0f / 1024.0f, 9.0f / 1024.0f, 57.0f / 1024.0f);
 	player = Entity(-0.8f, 0.0f, 1, playerSprite);
 	for (int i = 0; i < 2; i++){
 		for (int j = 0; j < 5; j++){
