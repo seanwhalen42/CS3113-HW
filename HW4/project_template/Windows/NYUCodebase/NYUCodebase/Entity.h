@@ -4,15 +4,16 @@
 #include "SheetSprite.h"
 
 class Entity{
+public:
 	//Constructors
 	Entity();
-	Entity(float x, float y, float mass, SheetSprite sprite);
+	Entity(float x, float y, float mass, SheetSprite sprite, bool isStatic);
 	~Entity();
 
 	//Accessors
 	float getX();
 	float getY();
-	void update();
+	void update(float elapsed);
 	void draw();
 
 	//Mutators
@@ -20,7 +21,6 @@ class Entity{
 	void setVelocity_y(float newY);
 	void setAcceleration_x(float newX);
 	void setAcceleration_y(float newY);
-	void reset();
 
 private:
 	//Position
@@ -35,6 +35,10 @@ private:
 	float friction_x;
 	float friction_y;
 	float mass;
+
+	bool isStatic;
+	bool isVisible;
+	bool collisionEnabled;
 
 	//Collision Flags
 	bool collidingTop;

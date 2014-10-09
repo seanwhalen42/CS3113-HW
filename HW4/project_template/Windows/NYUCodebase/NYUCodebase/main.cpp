@@ -34,7 +34,7 @@ SDL_Window* displayWindow;
 
 int main(int argc, char *argv[])
 {
-	ClassDemoApp app;
-	while (!app.UpdateAndRender()) {}
+	App app;
+	while (!app.updateAndRender()) {}
 	return 0;
 }

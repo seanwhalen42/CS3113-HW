@@ -3,6 +3,7 @@
 #include <SDL_image.h>
 
 class SheetSprite{
+public:
 	SheetSprite();
 	SheetSprite(GLuint textureID, float u, float v, float width, float height);
 	~SheetSprite();
