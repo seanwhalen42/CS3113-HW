@@ -1,3 +1,4 @@
+#define
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
@@ -19,8 +20,15 @@ float Entity::getY(){
 	return y;
 }
 
-void Entity::update(float elapsed){
+void Entity::update(){
+	velocity_x = lerp(velocity_x, 0.0f, FIXED_TIMESTEP * friction_x);
+	velocity_y = lerp(velocity_y, 0.0f, FIXED_TIMESTEP * friction_y);
 
+	velocity_x += acceleration_x * FIXED_TIMESTEP;
+	velocity_y += acceleration_y * FIXED_TIMESTEP;
+
+	x += velocity_x;
+	y += velocity_y;
 }
 
 void Entity::draw(){
@@ -41,4 +49,8 @@ void Entity::setAcceleration_x(float newX){
 
 void Entity::setAcceleration_y(float newY){
 	acceleration_y = newY;
+}
+
+float lerp(float v0, float v1, float t){
+	return (1.0 - t)*v0 + t*v1;
 }

@@ -2,6 +2,10 @@
 #include <SDL_opengl.h>
 #include <SDL_image.h>
 #include "SheetSprite.h"
+// 60 FPS (1.0f/60.0f)
+#define FIXED_TIMESTEP 0.0166666f
+#define MAX_TIMESTEPS 6
+float timeLeftOver = 0.0f;
 
 class Entity{
 public:
@@ -13,7 +17,7 @@ public:
 	//Accessors
 	float getX();
 	float getY();
-	void update(float elapsed);
+	void update();
 	void draw();
 
 	//Mutators
@@ -48,3 +52,5 @@ private:
 
 	SheetSprite sprite;
 };
+
+float lerp(float v0, float v1, float t);
