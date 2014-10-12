@@ -3,6 +3,8 @@
 #include <SDL_image.h>
 #include "App.h"
 
+enum GameState { STATE_TITLE, STATE_GAME, STATE_GAME_OVER };
+
 App::App(){
 	init();
 	done = false;
@@ -19,6 +21,7 @@ void App::init() {
 		SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
 	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
 	SDL_GL_MakeCurrent(displayWindow, context);
+	GameState state = STATE_TITLE;
 }
 
 void App::update(float elapsed) {
@@ -28,6 +31,10 @@ void App::update(float elapsed) {
 			done = true;
 		}
 	}
+}
+
+void App::drawText(std::string str, float x, float y){
+
 }
 
 bool App::collisionDetect(Entity* entityA, Entity* entityB){
