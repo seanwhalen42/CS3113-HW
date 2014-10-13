@@ -37,7 +37,26 @@ void App::drawText(std::string str, float x, float y){
 
 }
 
-bool App::collisionDetect(Entity* entityA, Entity* entityB){
-	return !(entityA->getBottom() >= entityB->getTop() || entityA->getTop() <= entityB->getBottom() || entityA->getLeft() >= entityB->getRight() ||
-		entityA->getRight() <= entityB->getLeft());
+void App::collisionCheck(Entity* entityA, Entity* entityB){
+	entityA->clearCollisionFlags();
+	entityB->clearCollisionFlags();
+	if (entityA->getBottom() < entityB->getTop() && entityA->getBottom() > entityB->getBottom()){
+		entityA->setCollisionBottom(true);
+		entityB->setCollisionTop(true);
+	}
+	
+	if (entityA->getTop() > entityB->getBottom() && entityA->getTop() < entityB->getTop()){
+		entityA->setCollisionTop(true);
+		entityB->setCollisionBottom(true);
+	}
+
+	if (entityA->getRight() > entityB->getLeft() && entityA->getLeft() < entityB->getRight()){
+		entityA->setCollisionRight(true);
+		entityB->setCollisionLeft(true);
+	}
+	
+	if (entityA->getLeft() < entityB->getRight() && entityA->getRight() < entityB->getRight()){
+		entityA->setCollisionLeft(true);
+		entityB->setCollisionRight(true);
+	}
 }

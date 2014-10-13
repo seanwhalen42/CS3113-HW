@@ -29,6 +29,11 @@ public:
 	void setVelocity_y(float newY);
 	void setAcceleration_x(float newX);
 	void setAcceleration_y(float newY);
+	void clearCollisionFlags();
+	void setCollisionTop(bool newTop);
+	void setCollisionBottom(bool newBottom);
+	void setCollisionLeft(bool newLeft);
+	void setCollisionRight(bool newRight);
 
 private:
 	//Position

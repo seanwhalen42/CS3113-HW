@@ -70,6 +70,29 @@ void Entity::setAcceleration_y(float newY){
 	acceleration_y = newY;
 }
 
+void Entity::clearCollisionFlags(){
+	collidingTop = false;
+	collidingBottom = false;
+	collidingLeft = false;
+	collidingRight = false;
+}
+
+void Entity::setCollisionTop(bool newTop){
+	collidingTop = newTop;
+}
+
+void Entity::setCollisionBottom(bool newBottom){
+	collidingBottom = newBottom;
+}
+
+void Entity::setCollisionLeft(bool newLeft){
+	collidingLeft = newLeft;
+}
+
+void Entity::setCollisionRight(bool newRight){
+	collidingRight = newRight;
+}
+
 float lerp(float v0, float v1, float t){
 	return (1.0 - t)*v0 + t*v1;
 }

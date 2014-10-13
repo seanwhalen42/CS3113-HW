@@ -20,7 +20,7 @@ public:
 	void drawGameOver();
 	void drawText(std::string str, float x, float y);
 
-	bool collisionDetect(Entity* entityA, Entity* entityB);
+	void collisionCheck(Entity* entityA, Entity* entityB);
 
 private:
 	bool done;
