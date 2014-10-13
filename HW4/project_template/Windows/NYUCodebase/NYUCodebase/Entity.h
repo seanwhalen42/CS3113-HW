@@ -17,6 +17,10 @@ public:
 	//Accessors
 	float getX();
 	float getY();
+	float getTop();
+	float getBottom();
+	float getLeft();
+	float getRight();
 	void update();
 	void draw();
 
