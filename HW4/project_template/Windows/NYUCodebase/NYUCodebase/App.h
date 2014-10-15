@@ -18,9 +18,12 @@ public:
 	void update(float elapsed);
 	void drawTitle();
 	void drawGameOver();
-	void drawText(std::string str, float x, float y);
 
 	void collisionCheck(Entity* entityA, Entity* entityB);
+	float calculatePenetration(Entity* entityA, Entity* entityB);
+
+	SheetSprite decodeFromIndex(int index, int spriteCountX, int spriteCountY, GLuint texture);
+	void renderFont(std::string str);
 
 private:
 	bool done;

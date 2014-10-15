@@ -33,7 +33,7 @@ void App::update(float elapsed) {
 	}
 }
 
-void App::drawText(std::string str, float x, float y){
+void App::drawTitle(){
 
 }
 
@@ -59,4 +59,21 @@ void App::collisionCheck(Entity* entityA, Entity* entityB){
 		entityA->setCollisionLeft(true);
 		entityB->setCollisionRight(true);
 	}
+}
+
+float App::calculatePenetration(Entity* entityA, Entity* entityB){
+
+}
+
+SheetSprite App::decodeFromIndex(int index, int spriteCountX, int spriteCountY, GLuint texture){
+	float u = (index % spriteCountX) / spriteCountX;
+	float v = (index / spriteCountX) / spriteCountY;
+	float spriteWidth = 1 / spriteCountX;
+	float spriteHeight = 1 / spriteCountY;
+	SheetSprite sprite = SheetSprite(texture, u, v, spriteWidth, spriteHeight);
+	return sprite;
+}
+
+void App::renderFont(std::string str){
+
 }
