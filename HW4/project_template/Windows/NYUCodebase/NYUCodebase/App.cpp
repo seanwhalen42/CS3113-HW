@@ -33,8 +33,25 @@ void App::update(float elapsed) {
 	}
 }
 
-void App::drawTitle(){
+GLuint App::LoadTexture(std::string image_path_str){
+	const char* image_path = image_path_str.c_str();
+	SDL_Surface *surface = IMG_Load(image_path);
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glTexImage2D(GL_TEXTURE_2D, 0, 4, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	SDL_FreeSurface(surface);
+	return textureID;
+}
 
+void App::drawTitle(){
+	GLuint fontTexture = LoadTexture("font1.png");
+	int titleArray[14] = { 83, 112, 97, 99, 101, 32, 73, 110, 118, 97, 100, 101, 114, 115 }; //Space Invaders
+	for (int i : titleArray){
+		SheetSprite charSprite = decodeFromIndex(i, 16, 16, fontTexture);
+	}
 }
 
 void App::collisionCheck(Entity* entityA, Entity* entityB){

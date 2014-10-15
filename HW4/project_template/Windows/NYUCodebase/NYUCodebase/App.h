@@ -16,6 +16,7 @@ public:
 
 	void draw();
 	void update(float elapsed);
+	GLuint LoadTexture(std::string image_path_str);
 	void drawTitle();
 	void drawGameOver();
 
