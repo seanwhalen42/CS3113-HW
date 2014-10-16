@@ -144,6 +144,7 @@ void setup() {
 	displayWindow = SDL_CreateWindow("Pong", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
 	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
 	SDL_GL_MakeCurrent(displayWindow, context);
+	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
 };
 
 void update(float elapsed, std::vector<Entity*> &Entities) {
@@ -195,8 +196,9 @@ void goalCollisionCheck(Entity* ball, Entity* leftGoal, Entity* rightGoal){
 	}
 }
 
-void paddleCollisionCheck(Entity* ball, Entity* leftPaddle, Entity* rightPaddle){
+void paddleCollisionCheck(Entity* ball, Entity* leftPaddle, Entity* rightPaddle, Mix_Chunk* blip){
 	if (collisionDetect(ball, leftPaddle)){
+		Mix_PlayChannel(-1, blip, 0);
 		float diff = (ball->getY() - leftPaddle->getY()) / 0.15;//difference should be between -1 and 1
 		float angle = (60 * diff)*(M_PI / 180);
 		ball->setDirection_x(cos(angle));
@@ -204,6 +206,7 @@ void paddleCollisionCheck(Entity* ball, Entity* leftPaddle, Entity* rightPaddle)
 	}
 
 	else if (collisionDetect(ball, rightPaddle)){
+		Mix_PlayChannel(-1, blip, 0);
 		float diff = (ball->getY() - rightPaddle->getY()) / 0.15;//difference should be between -1 and 1
 		float angle = (60 * diff)*(M_PI / 180);
 		ball->setDirection_x(-cos(angle));

@@ -8,6 +8,8 @@
 
 //SDL_Window* displayWindow;
 
+
+
 void drawNet() {
 	float net[8] = { -0.025, 1, -0.025, -1, 0.025, -1, 0.025, 1 };
 	glVertexPointer(2, GL_FLOAT, 0, net);
@@ -46,6 +48,8 @@ int main(int argc, char *argv[])
 	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
 	ball.setDirection_x(1);
 	ball.setDirection_y(0);
+	Mix_Chunk* hitBlip;
+	hitBlip = Mix_LoadWAV("blip.wav");
 	bool done = false;
 	
 	SDL_Event event;
@@ -63,7 +67,7 @@ int main(int argc, char *argv[])
 		processEvents(&leftPaddle, &rightPaddle);
 		wallCollisionCheck(&ball, &topWall, &bottomWall);
 		goalCollisionCheck(&ball, &leftGoal, &rightGoal);
-		paddleCollisionCheck(&ball, &leftPaddle, &rightPaddle);
+		paddleCollisionCheck(&ball, &leftPaddle, &rightPaddle, hitBlip);
 		update(elapsed, Entities);
 		draw(Entities);
 		drawNet();
