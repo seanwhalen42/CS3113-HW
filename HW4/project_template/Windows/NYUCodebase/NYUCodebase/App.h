@@ -20,6 +20,9 @@ public:
 	void drawTitle();
 	void drawGameOver();
 
+	void makeWall(GLuint texture, float wallStart, float wallHeight);
+	void makeFloor(GLuint texture, float floorLeft, float floorLength);
+
 	void collisionCheck(Entity* entityA, Entity* entityB);
 	float calculatePenetration(Entity* entityA, Entity* entityB);
 

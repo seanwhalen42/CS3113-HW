@@ -51,7 +51,12 @@ void App::drawTitle(){
 	int titleArray[14] = { 83, 112, 97, 99, 101, 32, 73, 110, 118, 97, 100, 101, 114, 115 }; //Space Invaders
 	for (int i : titleArray){
 		SheetSprite charSprite = decodeFromIndex(i, 16, 16, fontTexture);
+		charSprite.draw(-216 + 32 * i, 0, 1);
 	}
+}
+
+void App::makeWall(GLuint texture, float wallStart, float wallHeight){
+
 }
 
 void App::collisionCheck(Entity* entityA, Entity* entityB){
