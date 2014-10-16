@@ -177,19 +177,22 @@ void processEvents(Entity* leftPaddle, Entity* rightPaddle){
 	}
 }
 
-void wallCollisionCheck(Entity* ball, Entity* topWall, Entity* bottomWall){
+void wallCollisionCheck(Entity* ball, Entity* topWall, Entity* bottomWall, Mix_Chunk* wallBlip){
 	if (collisionDetect(ball, topWall) || collisionDetect(ball, bottomWall)){
+		Mix_PlayChannel(-1, wallBlip, 0);
 		ball->bounceY();
 	}
 }
 
-void goalCollisionCheck(Entity* ball, Entity* leftGoal, Entity* rightGoal){
+void goalCollisionCheck(Entity* ball, Entity* leftGoal, Entity* rightGoal, Mix_Chunk* scoreSound){
 	if (collisionDetect(ball, leftGoal)){
+		Mix_PlayChannel(-1, scoreSound, 0);
 		ball->reset();
 		ball->setDirection_x(-1);
 		ball->setDirection_y(0);
 	}
 	else if (collisionDetect(ball, rightGoal)){
+		Mix_PlayChannel(-1, scoreSound, 0);
 		ball->reset();
 		ball->setDirection_x(1);
 		ball->setDirection_y(0);

@@ -50,7 +50,14 @@ int main(int argc, char *argv[])
 	ball.setDirection_y(0);
 	Mix_Chunk* hitBlip;
 	hitBlip = Mix_LoadWAV("blip.wav");
+	Mix_Chunk* wallBlip;
+	wallBlip = Mix_LoadWAV("bounce.wav");
 	bool done = false;
+	Mix_Chunk* scoreSound;
+	scoreSound = Mix_LoadWAV("score.wav");
+	Mix_Music* music;
+	music = Mix_LoadMUS("Jumpshot.mp3");
+	Mix_PlayMusic(music, -1);
 	
 	SDL_Event event;
 
@@ -65,8 +72,8 @@ int main(int argc, char *argv[])
 		lastFrameTicks = ticks;
 		glClear(GL_COLOR_BUFFER_BIT);
 		processEvents(&leftPaddle, &rightPaddle);
-		wallCollisionCheck(&ball, &topWall, &bottomWall);
-		goalCollisionCheck(&ball, &leftGoal, &rightGoal);
+		wallCollisionCheck(&ball, &topWall, &bottomWall, wallBlip);
+		goalCollisionCheck(&ball, &leftGoal, &rightGoal, scoreSound);
 		paddleCollisionCheck(&ball, &leftPaddle, &rightPaddle, hitBlip);
 		update(elapsed, Entities);
 		draw(Entities);
