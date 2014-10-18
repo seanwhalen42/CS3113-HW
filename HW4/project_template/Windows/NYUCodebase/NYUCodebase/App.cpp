@@ -55,8 +55,15 @@ void App::drawTitle(){
 	}
 }
 
-void App::makeWall(GLuint texture, float wallStart, float wallHeight){
-
+void App::drawTiles(){
+	for (int y = 0; y < LEVEL_HEIGHT; y++){
+		for (int x = 0; x < LEVEL_WIDTH; x++){
+			float u = (float)(((int)levelData[y][x]) % SPRITE_COUNT_X) / (float)SPRITE_COUNT_X;
+			float v = (float)(((int)levelData[y][x]) / SPRITE_COUNT_X) / (float)SPRITE_COUNT_Y;
+			float spriteWidth = 1.0f / (float)SPRITE_COUNT_X;
+			float spriteHeight = 1.0f / (float)SPRITE_COUNT_Y;
+		}
+	}
 }
 
 void App::collisionCheck(Entity* entityA, Entity* entityB){

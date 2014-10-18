@@ -6,8 +6,11 @@
 #include "SheetSprite.h"
 #include "Entity.h"
 
+const int SPRITE_COUNT_X;
+const int SPRITE_COUNT_Y;
 const int LEVEL_WIDTH = 16;
 const int LEVEL_HEIGHT = 16;
+const float TILE_SIZE;
 
 class App{
 public:
@@ -23,8 +26,7 @@ public:
 	void drawTitle();
 	void drawGameOver();
 
-	void makeWall(GLuint texture, float wallStart, float wallHeight);
-	void makeFloor(GLuint texture, float floorLeft, float floorLength);
+	void drawTiles();
 
 	void collisionCheck(Entity* entityA, Entity* entityB);
 	float calculatePenetrationX(Entity* entityA, Entity* entityB);
