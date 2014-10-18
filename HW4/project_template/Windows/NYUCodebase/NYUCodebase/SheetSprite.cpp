@@ -1,9 +1,17 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
+#include <math.h>
 #include "SheetSprite.h"
 
 SheetSprite::SheetSprite(){}
+
+SheetSprite::SheetSprite(GLuint textureID, int index, int spriteCountX, int spriteCountY): texture(textureID) {
+	u = index % spriteCountX;
+	v = floor(float(index / spriteCountX));
+	width = 1 / spriteCountX;
+	height = 1 / spriteCountY;
+}
 
 SheetSprite::SheetSprite(GLuint textureID, float u, float v, float width, float height) : texture(textureID), u(u), v(v), width(width), height(height){}
 

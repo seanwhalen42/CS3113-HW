@@ -5,7 +5,8 @@
 class SheetSprite{
 public:
 	SheetSprite();
-	SheetSprite(GLuint textureID, float u, float v, float width, float height);
+	SheetSprite(GLuint textureID, int index, int spriteCountX, int spriteCountY); //For loading sprites from uniform spritesheets
+	SheetSprite(GLuint textureID, float u, float v, float width, float height); //For loading sprites from non-uniform spritesheets
 	~SheetSprite();
 	void draw(float x, float y, float scale);
 	float getU();

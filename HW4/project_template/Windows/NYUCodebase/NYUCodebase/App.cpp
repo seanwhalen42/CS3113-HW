@@ -83,8 +83,12 @@ void App::collisionCheck(Entity* entityA, Entity* entityB){
 	}
 }
 
-float App::calculatePenetration(Entity* entityA, Entity* entityB){
+float App::calculatePenetrationX(Entity* entityA, Entity* entityB){
+	return abs(entityA->getX() - entityB->getX());
+}
 
+float App::calculatePenetrationY(Entity* entityA, Entity* entityB){
+	return abs(entityA->getX() - entityB->getX());
 }
 
 SheetSprite App::decodeFromIndex(int index, int spriteCountX, int spriteCountY, GLuint texture){
