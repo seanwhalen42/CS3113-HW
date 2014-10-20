@@ -39,6 +39,14 @@ float Entity::getRight(){
 	return right;
 }
 
+bool Entity::getStatic(){
+	return isStatic;
+}
+
+float Entity::getMass(){
+	return mass;
+}
+
 void Entity::update(){
 	velocity_x = lerp(velocity_x, 0.0f, FIXED_TIMESTEP * friction_x);
 	velocity_y = lerp(velocity_y, 0.0f, FIXED_TIMESTEP * friction_y);

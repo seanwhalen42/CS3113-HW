@@ -21,6 +21,7 @@ public:
 	void updateAndRender();
 
 	void draw();
+	void processEvents();
 	void update(float elapsed);
 	GLuint LoadTexture(std::string image_path_str);
 	void drawTitle();
@@ -31,6 +32,7 @@ public:
 	void collisionCheck(Entity* entityA, Entity* entityB);
 	float calculatePenetrationX(Entity* entityA, Entity* entityB);
 	float calculatePenetrationY(Entity* entityA, Entity* entityB);
+	void applyPenetration(Entity* entityA, Entity* entityB);
 
 	int encodeChar(char charToEncode);
 	SheetSprite decodeFromIndex(int index, int spriteCountX, int spriteCountY, GLuint texture);

@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
+#include <vector>
 #include "App.h"
 
 enum GameState { STATE_TITLE, STATE_GAME, STATE_GAME_OVER };
@@ -24,7 +25,7 @@ void App::init() {
 	GameState state = STATE_TITLE;
 }
 
-void App::update(float elapsed) {
+void App::processEvents(float elapsed) {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
@@ -56,6 +57,7 @@ void App::drawTitle(){
 }
 
 void App::drawTiles(){
+	std::vector<float> vertexData;
 	for (int y = 0; y < LEVEL_HEIGHT; y++){
 		for (int x = 0; x < LEVEL_WIDTH; x++){
 			float u = (float)(((int)levelData[y][x]) % SPRITE_COUNT_X) / (float)SPRITE_COUNT_X;
@@ -96,6 +98,14 @@ float App::calculatePenetrationX(Entity* entityA, Entity* entityB){
 
 float App::calculatePenetrationY(Entity* entityA, Entity* entityB){
 	return abs(entityA->getX() - entityB->getX());
+}
+
+void App::applyPenetration(Entity* entityA, Entity* entityB){
+	float penetrationX = calculatePenetrationX(entityA, entityB);
+	float penetrationY = calculatePenetrationY(entityA, entityB);
+	if (!entityA->getStatic() && !entityB->getStatic()){
+		float totalMass = entityA->getMass() + entityB->getMass();
+	}
 }
 
 SheetSprite App::decodeFromIndex(int index, int spriteCountX, int spriteCountY, GLuint texture){

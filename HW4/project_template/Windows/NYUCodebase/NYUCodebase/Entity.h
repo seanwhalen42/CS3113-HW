@@ -21,6 +21,8 @@ public:
 	float getBottom();
 	float getLeft();
 	float getRight();
+	bool getStatic();
+	float getMass();
 	void update();
 	void draw();
 
@@ -34,6 +36,7 @@ public:
 	void setCollisionBottom(bool newBottom);
 	void setCollisionLeft(bool newLeft);
 	void setCollisionRight(bool newRight);
+	void jump();
 
 private:
 	//Position
