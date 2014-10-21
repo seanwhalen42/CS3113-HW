@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
+#include <string>
 #include "Entity.h"
 
 SDL_Window* displayWindow;
@@ -17,8 +18,8 @@ void setup(){
 int main(int argc, char *argv[])
 {
 	setup();
-	Entity testEntityA(0, 0, 0.5, 0.5);
-	Entity testEntityB(0.5, 0.5, 0.1, 0.1);
+	Entity testEntityA(0, 0, 0.5, 0.5, "element_blue_polygon");
+	//Entity testEntityB(0.5, 0.5, 0.1, 0.1);
 
 	bool done = false;
 	
@@ -31,7 +32,7 @@ int main(int argc, char *argv[])
 			}
 		}
 		testEntityA.draw();
-		testEntityB.draw();
+		//testEntityB.draw();
 		SDL_GL_SwapWindow(displayWindow);
 	}
 
