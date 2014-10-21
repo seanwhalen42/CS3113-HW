@@ -1,18 +1,9 @@
-
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
+#include "Entity.h"
 
 SDL_Window* displayWindow;
-
-void drawBox(float x, float y, float height, float width){
-	float vertexArray[8] = { x - (width / 2), y + (height / 2), x - (width / 2), y - (height / 2), x + (width / 2), y - (height / 2), x + (width / 2), y + (height / 2) };
-	glMatrixMode(GL_MODELVIEW);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(2, GL_FLOAT, 0, vertexArray);
-	glLoadIdentity();
-	glDrawArrays(GL_QUADS, 0, 4);
-}
 
 void setup(){
 	SDL_Init(SDL_INIT_VIDEO);
@@ -26,6 +17,8 @@ void setup(){
 int main(int argc, char *argv[])
 {
 	setup();
+	Entity testEntityA(0, 0, 0.5, 0.5);
+	Entity testEntityB(0.5, 0.5, 0.1, 0.1);
 
 	bool done = false;
 	
@@ -37,8 +30,8 @@ int main(int argc, char *argv[])
 				done = true;
 			}
 		}
-		drawBox(0, 0, 0.5, 0.5);
-		drawBox(1, 1, 0.1, 0.1);
+		testEntityA.draw();
+		testEntityB.draw();
 		SDL_GL_SwapWindow(displayWindow);
 	}
 
