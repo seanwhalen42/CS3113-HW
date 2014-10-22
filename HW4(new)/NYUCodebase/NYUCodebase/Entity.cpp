@@ -4,19 +4,6 @@
 #include <SDL_image.h>
 #include "Entity.h"
 
-GLuint LoadTexture(std::string image_path_str){
-	const char* image_path = image_path_str.c_str();
-	SDL_Surface *surface = IMG_Load(image_path);
-	GLuint textureID;
-	glGenTextures(1, &textureID);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	glTexImage2D(GL_TEXTURE_2D, 0, 4, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	SDL_FreeSurface(surface);
-	return textureID;
-}
-
 Entity::Entity(){}
 
 Entity::~Entity(){}
@@ -31,9 +18,11 @@ void Entity::draw(){
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glMatrixMode(GL_MODELVIEW);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(2, GL_FLOAT, 0, vertexArray);
 	glLoadIdentity();
+	glEnableClientState(GL_VERTEX_ARRAY);
+	GLfloat quadUVs[] = { 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0 };
+	glVertexPointer(2, GL_FLOAT, 0, vertexArray);
+	glTexCoordPointer(2, GL_FLOAT, 0, quadUVs);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDrawArrays(GL_QUADS, 0, 4);
 	glDisable(GL_TEXTURE_2D);
