@@ -10,6 +10,8 @@ SheetSprite::SheetSprite(GLuint texture, float u, float v, float height, float w
 
 }
 
+SheetSprite::~SheetSprite(){}
+
 void SheetSprite::draw(float scale){
 	GLfloat quad[] = { -width * scale, height * scale, -width * scale, -height * scale,
 		width * scale, -height * scale, width * scale, height * scale };
