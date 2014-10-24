@@ -27,15 +27,15 @@
     <ClCompile Include="SheetSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LoadTexture.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LoadTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SheetSprite.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadTexture.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

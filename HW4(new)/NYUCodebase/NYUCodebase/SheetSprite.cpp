@@ -8,6 +8,7 @@ SheetSprite::SheetSprite(){}
 
 SheetSprite::SheetSprite(GLuint texture, float sheetX, float sheetY, float pixelU, float pixelV, float pixelHeight, float pixelWidth) : texture(texture),
 sheetX(sheetX), sheetY(sheetY){
+	aspectRatio = sheetX / sheetY;
 	u = pixelU / sheetX;
 	v = pixelV / sheetY;
 	height = pixelHeight / sheetY;
@@ -17,8 +18,8 @@ sheetX(sheetX), sheetY(sheetY){
 SheetSprite::~SheetSprite(){}
 
 void SheetSprite::draw(float scale){
-	GLfloat quad[] = { -width * scale, height * scale, -width * scale, -height * scale,
-		width * scale, -height * scale, width * scale, height * scale };
+	GLfloat quad[] = { -width * scale * aspectRatio, height * scale, -width * scale * aspectRatio, -height * scale,
+		width * scale * aspectRatio, -height * scale, width * scale * aspectRatio, height * scale };
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glMatrixMode(GL_MODELVIEW);

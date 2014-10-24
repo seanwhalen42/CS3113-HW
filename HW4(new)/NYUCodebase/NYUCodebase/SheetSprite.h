@@ -17,4 +17,5 @@ private:
 	float width;
 	float sheetX;
 	float sheetY;
+	float aspectRatio;
 };
