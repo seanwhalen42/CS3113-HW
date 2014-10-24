@@ -1,4 +1,4 @@
-#pragma once
+
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
@@ -6,8 +6,12 @@
 
 SheetSprite::SheetSprite(){}
 
-SheetSprite::SheetSprite(GLuint texture, float u, float v, float height, float width) : texture(texture), u(u), v(v), height(height), width(width){
-
+SheetSprite::SheetSprite(GLuint texture, float sheetX, float sheetY, float pixelU, float pixelV, float pixelHeight, float pixelWidth) : texture(texture),
+sheetX(sheetX), sheetY(sheetY){
+	u = pixelU / sheetX;
+	v = pixelV / sheetY;
+	height = pixelHeight / sheetY;
+	width = pixelWidth / sheetX;
 }
 
 SheetSprite::~SheetSprite(){}

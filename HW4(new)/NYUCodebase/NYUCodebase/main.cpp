@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	//Entity testEntityA(0, 0, 0.5, 0.5, "element_blue_polygon.png");
 	//Entity testEntityB(0.5, 0.5, 0.1, 0.1);
 	GLuint testSpriteSheet = LoadTexture("enemies_spritesheet.png");
-    SheetSprite testSprite(testSpriteSheet, 136, 66, 51, 51);
+    SheetSprite testSprite(testSpriteSheet,353, 153, 136, 66, 51, 51);
 
 	bool done = false;
 	

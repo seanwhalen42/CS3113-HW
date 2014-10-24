@@ -6,7 +6,7 @@
 class SheetSprite{
 public:
 	SheetSprite();
-	SheetSprite(GLuint texture, float u, float v, float height, float width);
+	SheetSprite(GLuint texture, float sheetX, float sheetY, float pixelU, float pixelV, float pixelHeight, float pixelWidth);
 	~SheetSprite();
 	void draw(float scale);
 private:
@@ -15,4 +15,6 @@ private:
 	float v;
 	float height;
 	float width;
+	float sheetX;
+	float sheetY;
 };
