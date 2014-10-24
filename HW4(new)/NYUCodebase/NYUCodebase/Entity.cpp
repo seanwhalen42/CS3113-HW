@@ -8,11 +8,11 @@ Entity::Entity(){}
 
 Entity::~Entity(){}
 
-Entity::Entity(float x, float y, float height, float width, std::string img_path_str) :x(x), y(y), height(height), width(width) {
-	texture = LoadTexture(img_path_str);
+Entity::Entity(SheetSprite sprite, float x, float y):sprite(sprite), x(x), y(y){
+	height = sprite.getHeight();
+	width = sprite.getWidth();
 }
-
-void Entity::draw(){
+/*void Entity::draw(){
 	float vertexArray[8] = { x - (width / 2), y + (height / 2), x - (width / 2), y - (height / 2), 
 		x + (width / 2), y - (height / 2), x + (width / 2), y + (height / 2) };
 	glEnable(GL_TEXTURE_2D);
@@ -26,5 +26,9 @@ void Entity::draw(){
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDrawArrays(GL_QUADS, 0, 4);
 	glDisable(GL_TEXTURE_2D);
+}*/
+
+void Entity::draw(float scale){
+	sprite.draw(x, y, scale);
 }
 

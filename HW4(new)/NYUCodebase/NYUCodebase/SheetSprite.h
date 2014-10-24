@@ -8,7 +8,10 @@ public:
 	SheetSprite();
 	SheetSprite(GLuint texture, float sheetX, float sheetY, float pixelU, float pixelV, float pixelHeight, float pixelWidth);
 	~SheetSprite();
-	void draw(float scale);
+
+	float getHeight();
+	float getWidth();
+	void draw(float x, float y, float scale);
 private:
 	GLuint texture;
 	float u;

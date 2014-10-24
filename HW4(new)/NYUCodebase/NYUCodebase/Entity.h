@@ -3,18 +3,19 @@
 #include <SDL_opengl.h>
 #include <SDL_image.h>
 #include <string>
+#include "SheetSprite.h"
 #include "LoadTexture.h"
 
 class Entity{
 public:
 	Entity();
-	Entity(float x, float y, float height, float width, std::string img_path_str);
+	Entity(SheetSprite sprite, float x, float y);
 	~Entity();
-	void draw();
+	void draw(float scale);
 private:
 	float x;
 	float y;
 	float height;
 	float width;
-	GLuint texture;
+	SheetSprite sprite;
 };

@@ -17,7 +17,15 @@ sheetX(sheetX), sheetY(sheetY){
 
 SheetSprite::~SheetSprite(){}
 
-void SheetSprite::draw(float scale){
+float SheetSprite::getHeight(){
+	return height;
+}
+
+float SheetSprite::getWidth(){
+	return width;
+}
+
+void SheetSprite::draw(float x, float y, float scale){
 	GLfloat quad[] = { -width * scale * aspectRatio, height * scale, -width * scale * aspectRatio, -height * scale,
 		width * scale * aspectRatio, -height * scale, width * scale * aspectRatio, height * scale };
 	glEnable(GL_TEXTURE_2D);
@@ -25,6 +33,7 @@ void SheetSprite::draw(float scale){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glEnableClientState(GL_VERTEX_ARRAY);
+	glTranslatef(x, y, 0);
 	
 	GLfloat quadUVs[] = { u, v, u, v + height, u + width, v + height, u + width, v };
 	glVertexPointer(2, GL_FLOAT, 0, quad);
