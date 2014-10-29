@@ -73,9 +73,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="Entity.h" />
-    <ClCompile Include="LoadTexture.cpp" />
-    <ClInclude Include="LoadTexture.h" />
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SheetSprite.cpp" />
   </ItemGroup>

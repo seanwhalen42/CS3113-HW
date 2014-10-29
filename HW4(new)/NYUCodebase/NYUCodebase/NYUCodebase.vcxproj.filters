@@ -24,7 +24,7 @@
     <ClCompile Include="SheetSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LoadTexture.cpp">
+    <ClCompile Include="Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +32,10 @@
     <ClInclude Include="SheetSprite.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="LoadTexture.h">
+    <ClInclude Include="Entity.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
+    <ClInclude Include="Config.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

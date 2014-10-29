@@ -8,6 +8,7 @@
 
 SDL_Window* displayWindow;
 
+float timeLeftOver = 0.0f; //TRied to put this in Config.h, gave error
 void setup(){
 	SDL_Init(SDL_INIT_VIDEO);
 	displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
