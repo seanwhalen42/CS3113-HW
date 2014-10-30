@@ -7,22 +7,28 @@
 #include "SheetSprite.h"
 #include "LoadTexture.h"
 
+const float FRICTION = 0.1f;
+
 class Entity{
 public:
 	Entity();
-	Entity(SheetSprite sprite, float x, float y);
+	Entity(SheetSprite sprite, float x, float y, bool isStatic = false, float scale = 1);
 	~Entity();
-	void draw(float scale);
+	void draw();
 	void update();
 
 	//Accessors
 	bool isStatic();
+
+	//Mutators
+	void rescale(float newScale);
 
 private:
 	float x;
 	float y;
 	float height;
 	float width;
+	float scale;
 	SheetSprite sprite;
 
 	//Physics

@@ -8,18 +8,27 @@ Entity::Entity(){}
 
 Entity::~Entity(){}
 
-Entity::Entity(SheetSprite sprite, float x, float y):sprite(sprite), x(x), y(y){
+Entity::Entity(SheetSprite sprite, float x, float y, bool isStatic, float scale):sprite(sprite), x(x), y(y), staticEntity(isStatic), scale(scale){
 	height = sprite.getHeight();
 	width = sprite.getWidth();
-	acceleration_y = -9.8; //Gravity
+	velocity_x = 0;
+	velocity_y = 0;
+	acceleration_x = 0;
+	acceleration_y = -10.0f; //Gravity
+	friction_x = FRICTION;
+	friction_y = FRICTION;
 }
 
-void Entity::draw(float scale){
+void Entity::draw(){
 	sprite.draw(x, y, scale);
 }
 
 bool Entity::isStatic(){
 	return staticEntity;
+}
+
+void Entity::rescale(float newScale){
+	scale = newScale;
 }
 
 void Entity::update(){

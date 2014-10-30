@@ -2,11 +2,14 @@
 #include <SDL_opengl.h>
 #include <SDL_image.h>
 #include <string>
+#include <vector>
 #include "Entity.h"
 #include "SheetSprite.h"
 #include "LoadTexture.h"
 
 SDL_Window* displayWindow;
+
+std::vector<Entity> entities;
 
 float timeLeftOver = 0.0f; //TRied to put this in Config.h, gave error
 void setup(){
@@ -18,6 +21,13 @@ void setup(){
 	glOrtho(-1.33, 1.33, -1, 1, -1, 1);//Affects projection matrix
 }
 
+void fixedUpdateAndRender(){
+	for (Entity e : entities){
+		e.update();
+		e.draw();
+	}
+}
+
 int main(int argc, char *argv[])
 {
 	setup();
@@ -26,6 +36,8 @@ int main(int argc, char *argv[])
 	GLuint testSpriteSheet = LoadTexture("enemies_spritesheet.png");
     SheetSprite testSprite(testSpriteSheet,353, 153, 136, 66, 51, 51);
 	Entity testEntityA(testSprite, 0.1, 0.2);
+
+	entities.push_back(testEntityA);
 
 	bool done = false;
 	
@@ -37,7 +49,20 @@ int main(int argc, char *argv[])
 				done = true;
 			}
 		}
-		testEntityA.draw(1);
+		float lastFrameTicks = 0.0f;
+		float ticks = (float)SDL_GetTicks() / 1000.0f;
+		float elapsed = ticks - lastFrameTicks;
+		lastFrameTicks = ticks;
+		float fixedElapsed = elapsed + timeLeftOver;
+		
+		if (fixedElapsed > FIXED_TIMESTEP * MAX_TIMESTEPS){
+			fixedElapsed = FIXED_TIMESTEP * MAX_TIMESTEPS;
+		}
+		while (fixedElapsed >= FIXED_TIMESTEP){
+			fixedElapsed -= FIXED_TIMESTEP;
+			fixedUpdateAndRender();
+		}
+		//testEntityA.draw();
 		//testEntityB.draw();
 		//testSprite.draw(0.5, 0.5, 1);
 		SDL_GL_SwapWindow(displayWindow);
