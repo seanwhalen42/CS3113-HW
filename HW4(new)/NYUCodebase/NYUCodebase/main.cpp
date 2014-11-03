@@ -22,11 +22,14 @@ void setup(){
 }
 
 void fixedUpdateAndRender(){
-	for (Entity e : entities){
-		e.update();
-		e.draw();
+	std::vector<Entity>::iterator iter = entities.begin();
+	while (iter != entities.end()){
+		(*iter).update();
+		(*iter).draw();
+		iter++;
 	}
 }
+
 
 int main(int argc, char *argv[])
 {
@@ -34,7 +37,7 @@ int main(int argc, char *argv[])
 	
 	//Entity testEntityB(0.5, 0.5, 0.1, 0.1);
 	GLuint testSpriteSheet = LoadTexture("enemies_spritesheet.png");
-    SheetSprite testSprite(testSpriteSheet,353, 153, 136, 66, 51, 51);
+	SheetSprite testSprite(testSpriteSheet, 353, 153, 136, 66, 51, 51);
 	Entity testEntityA(testSprite, 0.1, 0.2);
 
 	entities.push_back(testEntityA);
