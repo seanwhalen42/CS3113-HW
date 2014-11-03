@@ -33,8 +33,8 @@ void Entity::rescale(float newScale){
 
 void Entity::update(){
 	if (!staticEntity){
-		velocity_x = lerp(velocity_x, 0.0f, FIXED_TIMESTEP * friction_x);
-		velocity_y = lerp(velocity_y, 0.0f, FIXED_TIMESTEP * friction_y);
+		//velocity_x = lerp(velocity_x, 0.0f, FIXED_TIMESTEP * friction_x);
+		//velocity_y = lerp(velocity_y, 0.0f, FIXED_TIMESTEP * friction_y);
 		velocity_x += acceleration_x * FIXED_TIMESTEP;
 		velocity_y += acceleration_y * FIXED_TIMESTEP;
 		x += velocity_x * FIXED_TIMESTEP;
