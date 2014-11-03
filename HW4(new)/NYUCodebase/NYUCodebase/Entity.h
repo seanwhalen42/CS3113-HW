@@ -18,10 +18,20 @@ public:
 	void update();
 
 	//Accessors
+	float getTop();
+	float getBottom();
+	float getLeft();
+	float getRight();
 	bool isStatic();
+	bool dynamicCollisionDetect(Entity* otherEntity);
 
 	//Mutators
 	void rescale(float newScale);
+	void clearFlags();
+	void setTopCollide(bool newBool);
+	void setBottomCollide(bool newBool);
+	void setLeftCollide(bool newBool);
+	void setRightCollide(bool newBool);
 
 private:
 	float x;
@@ -29,7 +39,15 @@ private:
 	float height;
 	float width;
 	float scale;
+	float top;
+	float bottom;
+	float left;
+	float right;
 	SheetSprite sprite;
+	bool topCollide;
+	bool bottomCollide;
+	bool leftCollide;
+	bool rightCollide;
 
 	//Physics
 	float velocity_x;
