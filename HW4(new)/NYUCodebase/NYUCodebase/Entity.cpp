@@ -14,7 +14,7 @@ Entity::Entity(SheetSprite sprite, float x, float y, bool isStatic, float scale)
 	velocity_x = 0;
 	velocity_y = 0;
 	acceleration_x = 0;
-	acceleration_y = -1.0f; //Gravity
+	acceleration_y = -10.0f; //Gravity
 	friction_x = FRICTION;
 	friction_y = FRICTION;
 }

@@ -21,15 +21,24 @@ void setup(){
 	glOrtho(-1.33, 1.33, -1, 1, -1, 1);//Affects projection matrix
 }
 
-void fixedUpdateAndRender(){
+void fixedUpdate(){
 	std::vector<Entity>::iterator iter = entities.begin();
 	while (iter != entities.end()){
 		(*iter).update();
+		iter++;
+	}
+}
+
+void render(){
+	glClear(GL_COLOR_BUFFER_BIT);
+	std::vector<Entity>::iterator iter = entities.begin();
+	while (iter != entities.end()){
 		(*iter).draw();
 		iter++;
 	}
 }
 
+float lastFrameTicks = 0.0f;
 
 int main(int argc, char *argv[])
 {
@@ -52,7 +61,6 @@ int main(int argc, char *argv[])
 				done = true;
 			}
 		}
-		float lastFrameTicks = 0.0f;
 		float ticks = (float)SDL_GetTicks() / 1000.0f;
 		float elapsed = ticks - lastFrameTicks;
 		lastFrameTicks = ticks;
@@ -63,8 +71,10 @@ int main(int argc, char *argv[])
 		}
 		while (fixedElapsed >= FIXED_TIMESTEP){
 			fixedElapsed -= FIXED_TIMESTEP;
-			fixedUpdateAndRender();
+			fixedUpdate();
 		}
+		timeLeftOver = fixedElapsed;
+		render();
 		//testEntityA.draw();
 		//testEntityB.draw();
 		//testSprite.draw(0.5, 0.5, 1);
