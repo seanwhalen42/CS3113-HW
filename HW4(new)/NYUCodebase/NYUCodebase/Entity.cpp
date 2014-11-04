@@ -27,6 +27,14 @@ void Entity::draw(){
 	sprite.draw(x, y, scale);
 }
 
+float Entity::getX(){
+	return x;
+}
+
+float Entity::getY(){
+	return y;
+}
+
 float Entity::getTop(){
 	return top;
 }
@@ -45,6 +53,14 @@ float Entity::getLeft(){
 
 bool Entity::isStatic(){
 	return staticEntity;
+}
+
+float Entity::calculatePenetrationX(Entity* otherEntity){
+	return abs(x - otherEntity->getX());
+}
+
+float Entity::calculatePenetrationY(Entity* otherEntity){
+	return abs(y - otherEntity->getY());
 }
 
 bool Entity::dynamicCollisionDetect(Entity* otherEntity){

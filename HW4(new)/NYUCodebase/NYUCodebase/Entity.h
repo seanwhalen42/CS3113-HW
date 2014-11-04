@@ -18,11 +18,15 @@ public:
 	void update();
 
 	//Accessors
+	float getX();
+	float getY();
 	float getTop();
 	float getBottom();
 	float getLeft();
 	float getRight();
 	bool isStatic();
+	float calculatePenetrationX(Entity* otherEntity);
+	float calculatePenetrationY(Entity* otherEntity);
 	bool dynamicCollisionDetect(Entity* otherEntity);
 
 	//Mutators
