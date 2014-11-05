@@ -23,10 +23,29 @@ void setup(){
 
 void fixedUpdate(){
 	std::vector<Entity>::iterator iter = entities.begin();
+	std::vector<Entity>::iterator iter2 = entities.begin();
 	while (iter != entities.end()){
 		(*iter).update();
 		iter++;
 	}
+	iter = entities.begin();
+	while (iter != entities.end()){
+		(*iter).moveY();
+		iter++;
+	}
+	iter = entities.begin();
+	while (iter != entities.end){
+		while (iter2 != entities.end){
+			if (iter != iter2){
+				if (iter->collisionDetect(iter2)){
+					//adjust on y axis
+				}
+			}
+		}
+	}
+	//move on x
+	//check for collisions
+	//adjust on x axis
 }
 
 void render(){

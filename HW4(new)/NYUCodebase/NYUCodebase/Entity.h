@@ -20,6 +20,8 @@ public:
 	//Accessors
 	float getX();
 	float getY();
+	float getWidth();
+	float getHeight();
 	float getTop();
 	float getBottom();
 	float getLeft();
@@ -27,9 +29,13 @@ public:
 	bool isStatic();
 	float calculatePenetrationX(Entity* otherEntity);
 	float calculatePenetrationY(Entity* otherEntity);
-	bool dynamicCollisionDetect(Entity* otherEntity);
+	bool collisionDetect(Entity* otherEntity);
+	//bool dynamicCollisionDetect(Entity* otherEntity);
+	void resolveCollision(Entity* otherEntity);
 
 	//Mutators
+	void moveX();
+	void moveY();
 	void rescale(float newScale);
 	void clearFlags();
 	void setTopCollide(bool newBool);

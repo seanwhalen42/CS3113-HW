@@ -35,6 +35,14 @@ float Entity::getY(){
 	return y;
 }
 
+float Entity::getWidth(){
+	return width;
+}
+
+float Entity::getHeight(){
+	return height;
+}
+
 float Entity::getTop(){
 	return top;
 }
@@ -56,14 +64,18 @@ bool Entity::isStatic(){
 }
 
 float Entity::calculatePenetrationX(Entity* otherEntity){
-	return abs(x - otherEntity->getX());
+	return abs(x - otherEntity->getX()) - ((width / 2) + otherEntity->getWidth() / 2);
 }
 
 float Entity::calculatePenetrationY(Entity* otherEntity){
-	return abs(y - otherEntity->getY());
+	return abs(y - otherEntity->getY()) - ((height / 2) + otherEntity->getHeight() / 2);
 }
 
-bool Entity::dynamicCollisionDetect(Entity* otherEntity){
+bool Entity::collisionDetect(Entity* otherEntity){
+	return !(bottom > otherEntity->getTop() || top < otherEntity->getBottom || left > otherEntity->getRight() || right < otherEntity->getLeft());
+}
+
+/*bool Entity::dynamicCollisionDetect(Entity* otherEntity){
 	if (top > otherEntity->getBottom() && top < otherEntity->getTop()){
 		topCollide = true;
 		otherEntity->setBottomCollide(true);
@@ -87,6 +99,28 @@ bool Entity::dynamicCollisionDetect(Entity* otherEntity){
 	else {
 		return false;
 	}
+}*/
+
+/*void Entity::resolveCollision(Entity* otherEntity){
+	if (staticEntity){
+		otherEntity->resolveCollision(this);
+	}
+	else if (otherEntity->isStatic()){
+		float yPenetration = calculatePenetrationY(otherEntity);
+		if (yPenetration)
+		if (y > otherEntity->getY()){
+			y += yPenetration;
+		}
+		else if (y < )
+	}
+}*/
+
+void Entity::moveX(){
+	x += velocity_x * FIXED_TIMESTEP;
+}
+
+void Entity::moveY(){
+	y += velocity_y * FIXED_TIMESTEP;
 }
 
 void Entity::rescale(float newScale){
@@ -122,8 +156,12 @@ void Entity::update(){
 		//velocity_y = lerp(velocity_y, 0.0f, FIXED_TIMESTEP * friction_y);
 		velocity_x += acceleration_x * FIXED_TIMESTEP;
 		velocity_y += acceleration_y * FIXED_TIMESTEP;
-		x += velocity_x * FIXED_TIMESTEP;
-		y += velocity_y * FIXED_TIMESTEP;
+		//y += velocity_y * FIXED_TIMESTEP; //move on y axis first
+		//then check for collisions
+		//adjust on  y axis
+		//x += velocity_x * FIXED_TIMESTEP; //move on x
+		//check for collisions
+		//adjust on x axis
 	}
 }
 
