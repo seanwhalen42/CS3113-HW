@@ -21,7 +21,7 @@ void setup(){
 	glOrtho(-1.33, 1.33, -1, 1, -1, 1);//Affects projection matrix
 }
 
-void fixedUpdate(){
+void fixedUpdate(){ //This seems like a lot of code for something as simple as collision detection. Am I doing something wrong?
 	std::vector<Entity>::iterator iter = entities.begin();
 	std::vector<Entity>::iterator iter2 = entities.begin();
 	while (iter != entities.end()){
@@ -37,15 +37,28 @@ void fixedUpdate(){
 	while (iter != entities.end){
 		while (iter2 != entities.end){
 			if (iter != iter2){
-				if (iter->collisionDetect(iter2)){
-					//adjust on y axis
+				if (iter->collisionDetect(iter2)){ //How do I pass a pointer to the other entity?
+					float yPenetration = iter->calculatePenetrationY(iter2);
+					//move on y axis (how do I determine which entity to move? What if one of the entities is static?)
 				}
 			}
 		}
 	}
-	//move on x
-	//check for collisions
-	//adjust on x axis
+	iter = entities.begin();
+	while (iter != entities.end()){
+		(*iter).moveX();
+		iter++;
+	}
+
+	while (iter != entities.end){
+		while (iter2 != entities.end){
+			if (iter != iter2){
+				if (iter->collisionDetect(iter2)){
+					//adjust on x axis
+				}
+			}
+		}
+	}
 }
 
 void render(){
