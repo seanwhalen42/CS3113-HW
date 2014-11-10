@@ -12,6 +12,7 @@ const float FRICTION = 0.1f;
 class Entity{
 public:
 	Entity();
+	Entity(float x, float y, float width, float height, bool isStatic = false, float scale = 1);
 	Entity(SheetSprite sprite, float x, float y, bool isStatic = false, float scale = 1);
 	~Entity();
 	void draw();
@@ -34,6 +35,8 @@ public:
 	void resolveCollision(Entity* otherEntity);
 
 	//Mutators
+	void setX(float newX);
+	void setY(float newY);
 	void moveX();
 	void moveY();
 	void rescale(float newScale);

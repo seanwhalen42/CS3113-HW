@@ -34,15 +34,24 @@ void fixedUpdate(){ //This seems like a lot of code for something as simple as c
 		iter++;
 	}
 	iter = entities.begin();
-	while (iter != entities.end){
-		while (iter2 != entities.end){
+	while (iter != entities.end()){
+		(*iter).moveY();
+		iter2 = entities.begin();
+		while (iter2 != entities.end()){
 			if (iter != iter2){
-				if (iter->collisionDetect(iter2)){ //How do I pass a pointer to the other entity?
-					float yPenetration = iter->calculatePenetrationY(iter2);
-					//move on y axis (how do I determine which entity to move? What if one of the entities is static?)
+				if (iter->collisionDetect(&(*iter2))){
+					float yPenetration = iter->calculatePenetrationY(&(*iter2));
+					if ((*iter).getY() > (*iter2).getY()){
+						(*iter).setY((*iter).getY() + yPenetration);
+					}
+					else {
+						(*iter).setY((*iter).getY() - yPenetration);
+					}
 				}
 			}
+			iter2++;
 		}
+		iter++;
 	}
 	iter = entities.begin();
 	while (iter != entities.end()){
@@ -50,10 +59,10 @@ void fixedUpdate(){ //This seems like a lot of code for something as simple as c
 		iter++;
 	}
 
-	while (iter != entities.end){
-		while (iter2 != entities.end){
+	while (iter != entities.end()){
+		while (iter2 != entities.end()){
 			if (iter != iter2){
-				if (iter->collisionDetect(iter2)){
+				if (iter->collisionDetect(&(*iter2))){
 					//adjust on x axis
 				}
 			}
@@ -78,10 +87,14 @@ int main(int argc, char *argv[])
 	
 	//Entity testEntityB(0.5, 0.5, 0.1, 0.1);
 	GLuint testSpriteSheet = LoadTexture("enemies_spritesheet.png");
+	GLuint floorSpriteSheet = LoadTexture("spritesheet_metal.png");
 	SheetSprite testSprite(testSpriteSheet, 353, 153, 136, 66, 51, 51);
+	SheetSprite floorSprite(floorSpriteSheet, 1024, 1024, 0, 140, 70, 220);
 	Entity testEntityA(testSprite, 0.1, 0.2);
+	Entity testFloor(floorSprite, 0.1, -0.5, true);
 
 	entities.push_back(testEntityA);
+	entities.push_back(testFloor);
 
 	bool done = false;
 	

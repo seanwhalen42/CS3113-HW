@@ -8,6 +8,20 @@ Entity::Entity(){}
 
 Entity::~Entity(){}
 
+Entity::Entity(float x, float y, float width, float height, bool isStatic, float scale):
+x(x), y(y), width(width), height(height),  staticEntity(isStatic), scale(scale){//DO NOT USE
+	velocity_x = 0;
+	velocity_y = 0;
+	acceleration_x = 0;
+	acceleration_y = -10.0f; //Gravity
+	top = y + height / 2;
+	bottom = y - height / 2;
+	left = x - width / 2;
+	right = x + width / 2;
+	friction_x = FRICTION;
+	friction_y = FRICTION;
+}
+
 Entity::Entity(SheetSprite sprite, float x, float y, bool isStatic, float scale):sprite(sprite), x(x), y(y), staticEntity(isStatic), scale(scale){
 	height = sprite.getHeight();
 	width = sprite.getWidth();
@@ -72,48 +86,16 @@ float Entity::calculatePenetrationY(Entity* otherEntity){
 }
 
 bool Entity::collisionDetect(Entity* otherEntity){
-	return !(bottom > otherEntity->getTop() || top < otherEntity->getBottom || left > otherEntity->getRight() || right < otherEntity->getLeft());
+	return !(bottom > otherEntity->getTop() || top < otherEntity->getBottom() || left > otherEntity->getRight() || right < otherEntity->getLeft());
 }
 
-/*bool Entity::dynamicCollisionDetect(Entity* otherEntity){
-	if (top > otherEntity->getBottom() && top < otherEntity->getTop()){
-		topCollide = true;
-		otherEntity->setBottomCollide(true);
-		return true;
-	}
-	else if (bottom < otherEntity->getTop() && bottom > otherEntity->getBottom()){
-		bottomCollide = true;
-		otherEntity->setTopCollide(true);
-		return true;
-	}
-	else if (left < otherEntity->getRight() && left > otherEntity->getLeft()){
-		leftCollide = true;
-		otherEntity->setRightCollide(true);
-		return true;
-	}
-	else if (right > otherEntity->getLeft() && right < otherEntity->getRight()){
-		rightCollide = true;
-		otherEntity->setLeftCollide(true);
-		return true;
-	}
-	else {
-		return false;
-	}
-}*/
+void Entity::setX(float newX){
+	x = newX;
+}
 
-/*void Entity::resolveCollision(Entity* otherEntity){
-	if (staticEntity){
-		otherEntity->resolveCollision(this);
-	}
-	else if (otherEntity->isStatic()){
-		float yPenetration = calculatePenetrationY(otherEntity);
-		if (yPenetration)
-		if (y > otherEntity->getY()){
-			y += yPenetration;
-		}
-		else if (y < )
-	}
-}*/
+void Entity::setY(float newY){
+	y = newY;
+}
 
 void Entity::moveX(){
 	x += velocity_x * FIXED_TIMESTEP;
@@ -156,12 +138,6 @@ void Entity::update(){
 		//velocity_y = lerp(velocity_y, 0.0f, FIXED_TIMESTEP * friction_y);
 		velocity_x += acceleration_x * FIXED_TIMESTEP;
 		velocity_y += acceleration_y * FIXED_TIMESTEP;
-		//y += velocity_y * FIXED_TIMESTEP; //move on y axis first
-		//then check for collisions
-		//adjust on  y axis
-		//x += velocity_x * FIXED_TIMESTEP; //move on x
-		//check for collisions
-		//adjust on x axis
 	}
 }
 
