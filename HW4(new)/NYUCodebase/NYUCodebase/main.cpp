@@ -31,11 +31,6 @@ void fixedUpdate(){ //This seems like a lot of code for something as simple as c
 	iter = entities.begin();
 	while (iter != entities.end()){
 		(*iter).moveY();
-		iter++;
-	}
-	iter = entities.begin();
-	while (iter != entities.end()){
-		(*iter).moveY();
 		iter2 = entities.begin();
 		while (iter2 != entities.end()){
 			if (iter != iter2){
