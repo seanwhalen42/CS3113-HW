@@ -37,6 +37,8 @@ public:
 	//Mutators
 	void setX(float newX);
 	void setY(float newY);
+	void setVelocity_X(float newX);
+	void setVelocity_Y(float newY);
 	void moveX();
 	void moveY();
 	void rescale(float newScale);

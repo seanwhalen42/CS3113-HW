@@ -26,8 +26,8 @@ float SheetSprite::getWidth(){
 }
 
 void SheetSprite::draw(float x, float y, float scale){
-	GLfloat quad[] = { -width * scale * aspectRatio, height * scale, -width * scale * aspectRatio, -height * scale,
-		width * scale * aspectRatio, -height * scale, width * scale * aspectRatio, height * scale };
+	GLfloat quad[] = { -width/2 * scale * aspectRatio, height/2 * scale, -width/2 * scale * aspectRatio, -height/2 * scale,
+		width/2 * scale * aspectRatio, -height/2 * scale, width/2 * scale * aspectRatio, height/2 * scale };
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glMatrixMode(GL_MODELVIEW);

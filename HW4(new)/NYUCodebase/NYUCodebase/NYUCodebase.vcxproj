@@ -72,7 +72,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="App.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClInclude Include="App.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Entity.h" />
     <ClCompile Include="Config.cpp" />

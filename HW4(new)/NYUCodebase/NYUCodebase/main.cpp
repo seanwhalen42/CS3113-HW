@@ -6,64 +6,9 @@
 #include "Entity.h"
 #include "SheetSprite.h"
 #include "LoadTexture.h"
+#include "App.h"
 
-SDL_Window* displayWindow;
 
-std::vector<Entity> entities;
-
-float timeLeftOver = 0.0f; //TRied to put this in Config.h, gave error
-void setup(){
-	SDL_Init(SDL_INIT_VIDEO);
-	displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
-	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
-	SDL_GL_MakeCurrent(displayWindow, context);
-	glMatrixMode(GL_PROJECTION);
-	glOrtho(-1.33, 1.33, -1, 1, -1, 1);//Affects projection matrix
-}
-
-void fixedUpdate(){ //This seems like a lot of code for something as simple as collision detection. Am I doing something wrong?
-	std::vector<Entity>::iterator iter = entities.begin();
-	std::vector<Entity>::iterator iter2 = entities.begin();
-	while (iter != entities.end()){
-		(*iter).update();
-		iter++;
-	}
-	iter = entities.begin();
-	while (iter != entities.end()){
-		(*iter).moveY();
-		iter2 = entities.begin();
-		while (iter2 != entities.end()){
-			if (iter != iter2){
-				if (iter->collisionDetect(&(*iter2))){
-					float yPenetration = iter->calculatePenetrationY(&(*iter2));
-					if ((*iter).getY() > (*iter2).getY()){
-						(*iter).setY((*iter).getY() + yPenetration);
-					}
-					else {
-						(*iter).setY((*iter).getY() - yPenetration);
-					}
-				}
-			}
-			iter2++;
-		}
-		iter++;
-	}
-	iter = entities.begin();
-	while (iter != entities.end()){
-		(*iter).moveX();
-		iter++;
-	}
-
-	while (iter != entities.end()){
-		while (iter2 != entities.end()){
-			if (iter != iter2){
-				if (iter->collisionDetect(&(*iter2))){
-					//adjust on x axis
-				}
-			}
-		}
-	}
-}
 
 void render(){
 	glClear(GL_COLOR_BUFFER_BIT);

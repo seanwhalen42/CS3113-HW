@@ -35,6 +35,10 @@ Entity::Entity(SheetSprite sprite, float x, float y, bool isStatic, float scale)
 	right = x + width / 2;
 	friction_x = FRICTION;
 	friction_y = FRICTION;
+	topCollide = false;
+	bottomCollide = false;
+	leftCollide = false;
+	rightCollide = false;
 }
 
 void Entity::draw(){
@@ -78,11 +82,11 @@ bool Entity::isStatic(){
 }
 
 float Entity::calculatePenetrationX(Entity* otherEntity){
-	return abs(x - otherEntity->getX()) - ((width / 2) + otherEntity->getWidth() / 2);
+	return -(abs(x - otherEntity->getX()) - ((width / 2) + otherEntity->getWidth() / 2));
 }
 
 float Entity::calculatePenetrationY(Entity* otherEntity){
-	return abs(y - otherEntity->getY()) - ((height / 2) + otherEntity->getHeight() / 2);
+	return -(abs(y - otherEntity->getY()) - ((height / 2) + otherEntity->getHeight() / 2));
 }
 
 bool Entity::collisionDetect(Entity* otherEntity){
@@ -91,18 +95,34 @@ bool Entity::collisionDetect(Entity* otherEntity){
 
 void Entity::setX(float newX){
 	x = newX;
+	left = x - width / 2;
+	right = x + width / 2;
 }
 
 void Entity::setY(float newY){
 	y = newY;
+	top = y + height / 2;
+	bottom = y - height / 2;
+}
+
+void Entity::setVelocity_X(float newX){
+	velocity_x = newX;
+}
+
+void Entity::setVelocity_Y(float newY){
+	velocity_y = newY;
 }
 
 void Entity::moveX(){
 	x += velocity_x * FIXED_TIMESTEP;
+	left = x - width / 2;
+	right = x + width / 2;
 }
 
 void Entity::moveY(){
 	y += velocity_y * FIXED_TIMESTEP;
+	top = y + height / 2;
+	bottom = y - height / 2;
 }
 
 void Entity::rescale(float newScale){
