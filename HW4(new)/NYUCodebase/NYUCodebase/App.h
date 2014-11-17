@@ -9,12 +9,21 @@
 const float COLLISION_BUFFER = 0.0001;
 
 class App{
+public:
 	App();
 	~App();
 	void setup();
 	void fixedUpdate();
+	void render();
+	void updateAndRender();
+	bool isDone();
+	void processEvents();
 private:
+	Entity* player;
 	std::vector<Entity> entities;
 	float timeLeftOver;
 	SDL_Window* displayWindow;
+	float lastFrameTicks;
+	bool done;
+	SDL_Event event;
 };

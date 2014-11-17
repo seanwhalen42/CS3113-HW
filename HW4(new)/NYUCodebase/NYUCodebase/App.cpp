@@ -6,6 +6,9 @@
 
 App::App(){
 	timeLeftOver = 0.0f;
+	lastFrameTicks = 0.0f;
+
+	bool done = false;
 }
 
 App::~App(){}
@@ -17,6 +20,17 @@ void App::setup(){
 	SDL_GL_MakeCurrent(displayWindow, context);
 	glMatrixMode(GL_PROJECTION);
 	glOrtho(-1.33, 1.33, -1, 1, -1, 1);//Affects projection matrix
+	
+	GLuint testSpriteSheet = LoadTexture("enemies_spritesheet.png");
+	GLuint floorSpriteSheet = LoadTexture("spritesheet_metal.png");
+	SheetSprite testSprite(testSpriteSheet, 353, 153, 136, 66, 51, 51);
+	SheetSprite floorSprite(floorSpriteSheet, 1024, 1024, 0, 140, 70, 220);
+	Entity testEntityA(testSprite, 0.1, 0.2);
+	Entity testFloor(floorSprite, 0.1, -0.5, true);
+
+	entities.push_back(testEntityA);
+	player = &entities[0];
+	entities.push_back(testFloor);
 }
 
 void App::fixedUpdate(){
@@ -73,5 +87,54 @@ void App::fixedUpdate(){
 			}
 		}
 		iter++;
+	}
+}
+
+void App::render(){
+	glClear(GL_COLOR_BUFFER_BIT);
+	std::vector<Entity>::iterator iter = entities.begin();
+	while (iter != entities.end()){
+		(*iter).draw();
+		iter++;
+	}
+}
+
+void App::updateAndRender(){
+	while (!done) {
+		while (SDL_PollEvent(&event)) {
+			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
+				done = true;
+			}
+		}
+		processEvents();
+		float ticks = (float)SDL_GetTicks() / 1000.0f;
+		float elapsed = ticks - lastFrameTicks;
+		lastFrameTicks = ticks;
+		float fixedElapsed = elapsed + timeLeftOver;
+
+		if (fixedElapsed > FIXED_TIMESTEP * MAX_TIMESTEPS){
+			fixedElapsed = FIXED_TIMESTEP * MAX_TIMESTEPS;
+		}
+		while (fixedElapsed >= FIXED_TIMESTEP){
+			fixedElapsed -= FIXED_TIMESTEP;
+			fixedUpdate();
+		}
+		timeLeftOver = fixedElapsed;
+		render();
+		//testEntityA.draw();
+		//testEntityB.draw();
+		//testSprite.draw(0.5, 0.5, 1);
+		SDL_GL_SwapWindow(displayWindow);
+	}
+}
+
+bool App::isDone(){
+	return done;
+}
+
+void App::processEvents(){
+	const Uint8 *keys = SDL_GetKeyboardState(NULL);
+	if (keys[SDL_SCANCODE_UP]){
+		player->setVelocity_Y(10.0f);
 	}
 }
