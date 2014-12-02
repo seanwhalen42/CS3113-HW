@@ -158,6 +158,8 @@ void Entity::update(){
 		//velocity_y = lerp(velocity_y, 0.0f, FIXED_TIMESTEP * friction_y);
 		velocity_x += acceleration_x * FIXED_TIMESTEP;
 		velocity_y += acceleration_y * FIXED_TIMESTEP;
+		//sprintf(msgbuf, "Y velocity %d\n", integerVariable);
+		//OutputDebugString(msgbuf);
 	}
 }
 

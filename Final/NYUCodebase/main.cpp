@@ -2,15 +2,21 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
+#include "Config.h"
+#include "Entity.h"
 
 SDL_Window* displayWindow;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
 	SDL_Init(SDL_INIT_VIDEO);
 	displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
 	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
 	SDL_GL_MakeCurrent(displayWindow, context);
+
+	glMatrixMode(GL_PROJECTION);
+	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
+
+	Entity testEntity(0, 0, 0.5, 0.5);
 
 	bool done = false;
 	
@@ -23,6 +29,7 @@ int main(int argc, char *argv[])
 			}
 		}
 		SDL_GL_SwapWindow(displayWindow);
+		testEntity.draw();
 	}
 
 	SDL_Quit();
