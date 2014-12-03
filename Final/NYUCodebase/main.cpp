@@ -4,32 +4,16 @@
 #include <SDL_image.h>
 #include "Config.h"
 #include "Entity.h"
+#include "App.h"
 
-SDL_Window* displayWindow;
+App app;
 
 int main(int argc, char *argv[]){
-	SDL_Init(SDL_INIT_VIDEO);
-	displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
-	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
-	SDL_GL_MakeCurrent(displayWindow, context);
-
-	glMatrixMode(GL_PROJECTION);
-	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
-
-	Entity testEntity(0, 0, 0.5, 0.5);
-
-	bool done = false;
 	
-	SDL_Event event;
+	app.setup();
 
-	while (!done) {
-		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
-				done = true;
-			}
-		}
-		SDL_GL_SwapWindow(displayWindow);
-		testEntity.draw();
+	while (!app.isDone()){
+		app.updateAndRender();
 	}
 
 	SDL_Quit();
