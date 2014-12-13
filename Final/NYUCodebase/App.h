@@ -11,13 +11,14 @@ public:
 	App();
 	~App();
 	void setup();
+	void processInput();
 	void render();
 	void updateAndRender();
 	bool isDone();
 private:
 	bool done;
 	std::vector <Entity> entities;
-	float timeLeftOver;
+	//float timeLeftOver;
 	float lastFrameTicks;
 	SDL_Event event;
 	SDL_Window* displayWindow;

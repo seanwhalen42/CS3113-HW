@@ -5,7 +5,7 @@
 #include "App.h"
 
 App::App(){
-	timeLeftOver = 0.0f;
+	//timeLeftOver = 0.0f;
 	lastFrameTicks = 0.0f;
 
 	bool done = false;
@@ -22,8 +22,18 @@ void App::setup(){
 	glMatrixMode(GL_PROJECTION);
 	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
 
-	Entity testEntity(0, 0, 0.5, 0.5);
+	GLuint testTexture = LoadTexture("spritesheet_metal.png");
+
+	SheetSprite testSprite(testTexture, 1024, 1024, 500, 0, 140, 140);
+	Entity testEntity(0.0f, 0.0f, testSprite);
 	entities.push_back(testEntity);
+}
+
+void App::processInput(){
+	const Uint8 *keys = SDL_GetKeyboardState(NULL);
+	if (keys[SDL_SCANCODE_UP]){
+		
+	}
 }
 
 void App::render(){
@@ -42,6 +52,10 @@ void App::updateAndRender(){
 				done = true;
 			}
 		}
+		float ticks = (float)SDL_GetTicks() / 1000.0f;
+		float elapsed = ticks - lastFrameTicks;
+		lastFrameTicks = ticks;
+
 		SDL_GL_SwapWindow(displayWindow);
 		render();
 	}
