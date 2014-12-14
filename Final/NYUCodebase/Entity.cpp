@@ -7,7 +7,8 @@
 
 Entity::Entity(){}
 
-Entity::Entity(float x, float y, SheetSprite sprite, float screenWidth, float screenHeight, float scale):x(x), y(y), scale(scale), sprite(sprite){
+Entity::Entity(float x, float y, SheetSprite sprite, bool isStatic, float screenWidth, float screenHeight, float scale):x(x), y(y), staticBool(isStatic),
+scale(scale), sprite(sprite){
 	if (width == -1){
 		width = sprite.getWidth();
 	}
@@ -43,10 +44,12 @@ void Entity::draw(){
 }
 
 void Entity::update(float elapsed){
-	velocity_x += acceleration_x * elapsed;
-	velocity_y += acceleration_y * elapsed;
-	x += velocity_x * elapsed;
-	y += velocity_y * elapsed;
+	if (!staticBool){
+		velocity_x += acceleration_x * elapsed;
+		velocity_y += acceleration_y * elapsed;
+		x += velocity_x * elapsed;
+		y += velocity_y * elapsed;
+	}
 }
 
 float Entity::getX(){
@@ -63,6 +66,10 @@ float Entity::getWidth(){
 
 float Entity::getHeight(){
 	return height;
+}
+
+bool Entity::isStatic(){
+	return staticBool;
 }
 
 void Entity::setX(float newX){

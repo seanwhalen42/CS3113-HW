@@ -24,11 +24,16 @@ void App::setup(){
 	glMatrixMode(GL_PROJECTION);
 	glOrtho(-1.33, 1.33, -1.0, 1.0, -1.0, 1.0);
 
-	GLuint testTexture = LoadTexture("spritesheet_metal.png");
+	GLuint metalTexture = LoadTexture("spritesheet_metal.png");
+	GLuint aliensTexture = LoadTexture("spritesheet_aliens.png");
 
-	SheetSprite testSprite(testTexture, 1024, 1024, 500, 0, 140, 140);
-	player = new Entity(0.0f, 1.0f, testSprite);
+	SheetSprite metalSprite(metalTexture, 1024, 1024, 500, 0, 140, 140);
+	SheetSprite aliensSprite(aliensTexture, 512, 256, 140, 140, 70, 70);
+	player = new Entity(0.0f, 1.0f, aliensSprite);
+	Entity* platform;
+	platform = new Entity(0.0f, -0.5f, metalSprite, true);
 	entities.push_back(player);
+	entities.push_back(platform);
 }
 
 void App::processInput(){

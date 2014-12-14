@@ -9,7 +9,7 @@
 class Entity{
 public:
 	Entity();
-	Entity(float x, float y, SheetSprite sprite, float screenWidth = -1, float screenHeight = -1, float scale = 1);
+	Entity(float x, float y, SheetSprite sprite, bool isStatic = false, float screenWidth = -1, float screenHeight = -1, float scale = 1);
 	~Entity();
 	void draw();
 	void update(float elapsed);
@@ -19,6 +19,7 @@ public:
 	float getY();
 	float getHeight();
 	float getWidth();
+	bool isStatic();
 
 	//Mutators
 	void setX(float newX);
@@ -41,4 +42,5 @@ private:
 	float velocity_y;
 	float acceleration_x;
 	float acceleration_y;
+	bool staticBool;
 };
