@@ -7,7 +7,7 @@
 
 Entity::Entity(){}
 
-Entity::Entity(float x, float y, SheetSprite sprite, float screenWidth = -1, float screenHeight = -1, float scale = 1):x(x), y(y), scale(scale), sprite(sprite){
+Entity::Entity(float x, float y, SheetSprite sprite, float screenWidth, float screenHeight, float scale):x(x), y(y), scale(scale), sprite(sprite){
 	if (width == -1){
 		width = sprite.getWidth();
 	}
@@ -20,6 +20,10 @@ Entity::Entity(float x, float y, SheetSprite sprite, float screenWidth = -1, flo
 	else{
 		height = screenHeight;
 	}
+	velocity_x = 0;
+	velocity_y = 0;
+	acceleration_x = 0;
+	acceleration_y = -0.9;
 }
 
 Entity::~Entity(){}

@@ -14,6 +14,8 @@ sheetX(sheetX), sheetY(sheetY){
 	width = pixelWidth / sheetX;
 }
 
+SheetSprite::~SheetSprite(){}
+
 float SheetSprite::getHeight(){
 	return height;
 }

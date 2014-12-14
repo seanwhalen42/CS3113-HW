@@ -11,7 +11,9 @@ App::App(){
 	bool done = false;
 }
 
-App::~App(){}
+App::~App(){
+	delete player;
+}
 
 void App::setup(){
 	SDL_Init(SDL_INIT_VIDEO);
@@ -25,22 +27,22 @@ void App::setup(){
 	GLuint testTexture = LoadTexture("spritesheet_metal.png");
 
 	SheetSprite testSprite(testTexture, 1024, 1024, 500, 0, 140, 140);
-	Entity testEntity(0.0f, 0.0f, testSprite);
-	entities.push_back(testEntity);
+	player = new Entity(0.0f, 1.0f, testSprite);
+	entities.push_back(player);
 }
 
 void App::processInput(){
 	const Uint8 *keys = SDL_GetKeyboardState(NULL);
 	if (keys[SDL_SCANCODE_UP]){
-		
+		player->setVelocityY(1.0f);
 	}
 }
 
 void App::render(){
 	glClear(GL_COLOR_BUFFER_BIT);
-	std::vector<Entity>::iterator iter = entities.begin();
+	std::vector<Entity*>::iterator iter = entities.begin();
 	while (iter != entities.end()){
-		(*iter).draw();
+		(**iter).draw();
 		iter++;
 	}
 }
@@ -55,6 +57,8 @@ void App::updateAndRender(){
 		float ticks = (float)SDL_GetTicks() / 1000.0f;
 		float elapsed = ticks - lastFrameTicks;
 		lastFrameTicks = ticks;
+
+		player->update(elapsed);
 
 		SDL_GL_SwapWindow(displayWindow);
 		render();

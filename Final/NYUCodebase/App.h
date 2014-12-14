@@ -12,12 +12,14 @@ public:
 	~App();
 	void setup();
 	void processInput();
+	void update();
 	void render();
 	void updateAndRender();
 	bool isDone();
 private:
 	bool done;
-	std::vector <Entity> entities;
+	Entity* player;
+	std::vector <Entity*> entities;
 	//float timeLeftOver;
 	float lastFrameTicks;
 	SDL_Event event;
