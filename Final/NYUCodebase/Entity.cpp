@@ -5,6 +5,8 @@
 #include "Config.h"
 #include "Entity.h"
 
+const float GRAVITY = -0.9;
+
 Entity::Entity(){}
 
 Entity::Entity(float x, float y, SheetSprite sprite, bool isStatic, float screenWidth, float screenHeight, float scale):x(x), y(y), staticBool(isStatic),
@@ -24,7 +26,7 @@ scale(scale), sprite(sprite){
 	velocity_x = 0;
 	velocity_y = 0;
 	acceleration_x = 0;
-	acceleration_y = -0.9;
+	acceleration_y = GRAVITY;
 }
 
 Entity::~Entity(){}

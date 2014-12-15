@@ -12,7 +12,9 @@ App::App(){
 }
 
 App::~App(){
-	delete player;
+	for (Entity* e : entities){
+		delete e;
+	}
 }
 
 void App::setup(){
@@ -59,6 +61,7 @@ void App::updateAndRender(){
 				done = true;
 			}
 		}
+		processInput();
 		float ticks = (float)SDL_GetTicks() / 1000.0f;
 		float elapsed = ticks - lastFrameTicks;
 		lastFrameTicks = ticks;
