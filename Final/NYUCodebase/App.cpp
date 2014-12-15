@@ -2,6 +2,7 @@
 #include <SDL_opengl.h>
 #include <SDL_image.h>
 #include <vector>
+#include <iostream>
 #include "App.h"
 
 App::App(){
@@ -43,6 +44,63 @@ void App::processInput(){
 	if (keys[SDL_SCANCODE_UP]){
 		player->setVelocityY(1.0f);
 	}
+	else if (keys[SDL_SCANCODE_SPACE]){
+		std::cout << "STOP";
+	}
+}
+
+bool App::collisionDetect(Entity* entityA, Entity* entityB){
+	float entityABottom = (entityA->getY()) - ((entityA->getHeight()) / 2);
+	float entityATop = (entityA->getY()) + ((entityA->getHeight()) / 2);
+	float entityALeft = (entityA->getX()) - ((entityA->getWidth()) / 2);
+	float entityARight = (entityA->getX()) + ((entityA->getWidth()) / 2);
+
+	float entityBBottom = (entityB->getY()) - ((entityB->getHeight()) / 2);
+	float entityBTop = (entityB->getY()) + ((entityB->getHeight()) / 2);
+	float entityBLeft = (entityB->getX()) - ((entityB->getWidth()) / 2);
+	float entityBRight = (entityB->getX()) + ((entityB->getWidth()) / 2);
+
+	return !(entityABottom > entityBTop || entityATop < entityBBottom || entityALeft > entityBRight || entityARight < entityBLeft);
+}
+
+float App::calcXPenetration(Entity* entityA, Entity* entityB){
+	float distance = abs(entityA->getX() - entityB->getX()); //Absolute distance between centers
+	float minDist = (entityA->getWidth() / 2) + (entityB->getWidth() / 2); //Distance of zero penetration
+	return distance- minDist;
+}
+
+float App::calcYPenetration(Entity* entityA, Entity* entityB){
+	float distance = abs(entityA->getY() - entityB->getY()); //Absolute distance between centers
+	float minDist = (entityA->getHeight() / 2) + (entityB->getHeight() / 2); //Distance of zero penetration
+	return distance - minDist;
+}
+
+void App::update(float elapsed){
+	std::vector<Entity*>::iterator iter = entities.begin();
+	std::vector<Entity*>::iterator iter2 = entities.begin();
+	iter = entities.begin();
+	while (iter != entities.end()){
+		if (!((*iter)->isStatic())){
+			(*iter)->moveY(elapsed);
+			iter2 = entities.begin();
+			while (iter2 != entities.end()){
+				if (iter != iter2){
+					if (collisionDetect((*iter), (*iter2))){
+						float yPenetration = calcYPenetration((*iter), (*iter2));
+						(*iter)->setVelocityY(0.0f);
+						if (((*iter)->getY()) > ((*iter)->getY())){
+							(*iter)->setY((*iter)->getY() + yPenetration + COLLISION_BUFFER);
+						}
+						else {
+							(*iter)->setY((*iter)->getY() - yPenetration - COLLISION_BUFFER);
+						}
+					}
+				}
+				iter2++;
+			}
+		}
+		iter++;
+	}
 }
 
 void App::render(){
@@ -66,7 +124,10 @@ void App::updateAndRender(){
 		float elapsed = ticks - lastFrameTicks;
 		lastFrameTicks = ticks;
 
-		player->update(elapsed);
+		//std::cout << "Player: " << player->getY();
+
+		update(elapsed);
+		//player->update(elapsed);
 
 		SDL_GL_SwapWindow(displayWindow);
 		render();
