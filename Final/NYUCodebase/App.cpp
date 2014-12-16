@@ -33,16 +33,15 @@ void App::setup(){
 	GLuint metalTexture = LoadTexture("spritesheet_metal.png");
 	GLuint aliensTexture = LoadTexture("spritesheet_aliens.png");
 
-	SheetSprite* metalSprite = new SheetSprite(metalTexture, 1024, 1024, 500, 0, 140, 140);
 	SheetSprite* aliensSprite = new SheetSprite(aliensTexture, 512, 256, 140, 140, 70, 70);
 
-	sprites.push_back(metalSprite);
 	sprites.push_back(aliensSprite);
 
 	player = new Entity(0.0f, 2.0f, aliensSprite);
-	Entity* platform;
-	//platform = new Entity(0.0f, -0.5f, NULL, true, 1.0, 0.01, 1.0f);
+	
+	bottomWall = new Entity(0.0f, -1.1f, NULL, true, 1.5, 0.05, 1);
 	entities.push_back(player);
+	entities.push_back(bottomWall);
 	//entities.push_back(platform);
 }
 
@@ -80,6 +79,25 @@ float App::calcYPenetration(Entity* entityA, Entity* entityB){
 }
 
 void App::update(float elapsed){
+	for (Entity* e : entities){
+		if (!e->isStatic()){
+			e->update(elapsed);
+		}
+	}
+	
+	std::vector<Entity*>::iterator iter = entities.begin();
+	iter = entities.begin();
+	while (iter != entities.end()){
+		if ((*iter) != player){
+			if (collisionDetect((*iter), (player))){
+				reset();
+			}
+		}
+		iter++;
+	}
+}
+
+/*void App::update(float elapsed){
 	std::vector<Entity*>::iterator iter = entities.begin();
 	std::vector<Entity*>::iterator iter2 = entities.begin();
 	iter = entities.begin();
@@ -98,6 +116,7 @@ void App::update(float elapsed){
 						else {
 							(*iter)->setY(((*iter)->getY()) - yPenetration - COLLISION_BUFFER);
 						}
+						reset();
 					}
 				}
 				iter2++;
@@ -128,8 +147,8 @@ void App::update(float elapsed){
 			}
 		}
 		iter++;
-	}*/
-}
+	}
+}*/
 
 void App::render(){
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -162,6 +181,10 @@ void App::updateAndRender(){
 	}
 
 	SDL_Quit();
+}
+
+void App::reset(){
+	player->reset();
 }
 
 bool App::isDone(){

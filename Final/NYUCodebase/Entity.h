@@ -39,6 +39,7 @@ public:
 	void setLeftCollide(bool newBool);
 	void setRightCollide(bool newBool);
 	void clearCollisionFlags();
+	void reset();
 
 private:
 	float x;

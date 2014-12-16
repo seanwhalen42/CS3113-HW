@@ -159,3 +159,10 @@ void Entity::clearCollisionFlags(){
 	leftCollide = false;
 	rightCollide = false;
 }
+
+void Entity::reset(){
+	velocity_x = 0.0f;
+	velocity_y = 0.0f;
+	x = 0;
+	y = 0;
+}

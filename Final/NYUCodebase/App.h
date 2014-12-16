@@ -20,10 +20,13 @@ public:
 	void update(float elapsed);
 	void render();
 	void updateAndRender();
+	void reset();
 	bool isDone();
 private:
 	bool done;
 	Entity* player;
+	Entity* bottomWall;
+	Entity* topWall;
 	std::vector <Entity*> entities;
 	std::vector <SheetSprite*> sprites;
 	//float timeLeftOver;
