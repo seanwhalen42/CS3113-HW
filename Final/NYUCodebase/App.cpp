@@ -96,6 +96,11 @@ void App::update(float elapsed){
 	if (topBarrier->getX() < -1.5){
 		topBarrier->setX(1.5);
 		bottomBarrier->setX(1.5);
+		float randFactor = float(rand() % 50);
+		randFactor -= 25;
+		randFactor /= 100;
+		topBarrier->setY(randFactor);
+		bottomBarrier->setY(randFactor);
 	}
 
 	std::vector<Entity*>::iterator iter = entities.begin();
