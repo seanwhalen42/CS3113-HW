@@ -9,18 +9,24 @@ const float GRAVITY = -0.9;
 
 Entity::Entity(){}
 
-Entity::Entity(float x, float y, SheetSprite sprite, bool isStatic, float screenWidth, float screenHeight, float scale):x(x), y(y), staticBool(isStatic),
+Entity::Entity(float x, float y, SheetSprite* sprite, bool isStatic, float screenWidth, float screenHeight, float scale):x(x), y(y), staticBool(isStatic),
 scale(scale), sprite(sprite){
-	if (screenWidth == -1){
-		width = sprite.getWidth();
+	if (sprite != NULL) {
+		if (screenWidth == -1){
+			width = sprite->getWidth() * scale;
+		}
+		else {
+			width = screenWidth * scale;
+		}
+		if (screenHeight == -1){
+			height = sprite->getHeight() * scale;
+		}
+		else{
+			height = screenHeight * scale;
+		}
 	}
 	else {
 		width = screenWidth;
-	}
-	if (screenHeight == -1){
-		height = sprite.getHeight();
-	}
-	else{
 		height = screenHeight;
 	}
 	velocity_x = 0;
@@ -32,17 +38,20 @@ scale(scale), sprite(sprite){
 Entity::~Entity(){}
 
 void Entity::draw(){
-	/*GLfloat quad[] = { -width / 2 * scale, height / 2 * scale, -width / 2 * scale, -height / 2 * scale,
-		width / 2 * scale, -height / 2 * scale, width / 2 * scale, height / 2 * scale };
-	glMatrixMode(GL_MODELVIEW);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glTranslatef(x, y, 0);
-	glVertexPointer(2, GL_FLOAT, 0, quad);
-	glDrawArrays(GL_QUADS, 0, 4);
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glLoadIdentity();*/
-
-	sprite.draw(x, y, scale);
+	if (sprite == NULL){
+		GLfloat quad[] = { -width / 2 * scale, height / 2 * scale, -width / 2 * scale, -height / 2 * scale,
+			width / 2 * scale, -height / 2 * scale, width / 2 * scale, height / 2 * scale };
+		glMatrixMode(GL_MODELVIEW);
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glTranslatef(x, y, 0);
+		glVertexPointer(2, GL_FLOAT, 0, quad);
+		glDrawArrays(GL_QUADS, 0, 4);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glLoadIdentity();
+	}
+	else {
+		sprite->draw(x, y, scale);
+	}
 }
 
 void Entity::update(float elapsed){

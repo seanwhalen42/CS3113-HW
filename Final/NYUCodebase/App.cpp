@@ -16,6 +16,9 @@ App::~App(){
 	for (Entity* e : entities){
 		delete e;
 	}
+	for (SheetSprite* s : sprites){
+		delete s;
+	}
 }
 
 void App::setup(){
@@ -30,22 +33,23 @@ void App::setup(){
 	GLuint metalTexture = LoadTexture("spritesheet_metal.png");
 	GLuint aliensTexture = LoadTexture("spritesheet_aliens.png");
 
-	SheetSprite metalSprite(metalTexture, 1024, 1024, 500, 0, 140, 140);
-	SheetSprite aliensSprite(aliensTexture, 512, 256, 140, 140, 70, 70);
-	player = new Entity(0.0f, 1.0f, aliensSprite);
+	SheetSprite* metalSprite = new SheetSprite(metalTexture, 1024, 1024, 500, 0, 140, 140);
+	SheetSprite* aliensSprite = new SheetSprite(aliensTexture, 512, 256, 140, 140, 70, 70);
+
+	sprites.push_back(metalSprite);
+	sprites.push_back(aliensSprite);
+
+	player = new Entity(0.0f, 2.0f, aliensSprite);
 	Entity* platform;
-	platform = new Entity(0.0f, -0.5f, metalSprite, true);
+	//platform = new Entity(0.0f, -0.5f, NULL, true, 1.0, 0.01, 1.0f);
 	entities.push_back(player);
-	entities.push_back(platform);
+	//entities.push_back(platform);
 }
 
 void App::processInput(){
 	const Uint8 *keys = SDL_GetKeyboardState(NULL);
 	if (keys[SDL_SCANCODE_UP]){
 		player->setVelocityY(1.0f);
-	}
-	else if (keys[SDL_SCANCODE_SPACE]){
-		std::cout << "STOP";
 	}
 }
 
@@ -88,11 +92,11 @@ void App::update(float elapsed){
 					if (collisionDetect((*iter), (*iter2))){
 						float yPenetration = calcYPenetration((*iter), (*iter2));
 						(*iter)->setVelocityY(0.0f);
-						if (((*iter)->getY()) > ((*iter)->getY())){
-							(*iter)->setY((*iter)->getY() + yPenetration + COLLISION_BUFFER);
+						if (((*iter)->getY()) > ((*iter2)->getY())){
+							(*iter)->setY(((*iter)->getY()) + yPenetration + COLLISION_BUFFER);
 						}
 						else {
-							(*iter)->setY((*iter)->getY() - yPenetration - COLLISION_BUFFER);
+							(*iter)->setY(((*iter)->getY()) - yPenetration - COLLISION_BUFFER);
 						}
 					}
 				}
@@ -101,6 +105,30 @@ void App::update(float elapsed){
 		}
 		iter++;
 	}
+
+	iter = entities.begin();
+	iter2 = entities.begin();
+	/*while (iter != entities.end()){
+		if (!((*iter)->isStatic())){
+			(*iter)->moveX(elapsed);
+			while (iter2 != entities.end()){
+				if (iter != iter2){
+					if (collisionDetect(*iter, *iter2)){
+						float xPenetration = calcXPenetration((*iter), (*iter2));
+						(*iter)->setVelocityY(0.0f);
+						if (((*iter)->getX()) > (*iter)->getX()){
+							(*iter)->setX((*iter)->getX() + xPenetration + COLLISION_BUFFER);
+						}
+						else {
+							(*iter)->setX((*iter)->getX() - xPenetration - COLLISION_BUFFER);
+						}
+					}
+				}
+				iter2++;
+			}
+		}
+		iter++;
+	}*/
 }
 
 void App::render(){

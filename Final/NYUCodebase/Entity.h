@@ -9,7 +9,7 @@
 class Entity{
 public:
 	Entity();
-	Entity(float x, float y, SheetSprite sprite, bool isStatic = false, float screenWidth = -1, float screenHeight = -1, float scale = 1);
+	Entity(float x, float y, SheetSprite* sprite = NULL, bool isStatic = false, float screenWidth = -1, float screenHeight = -1, float scale = 1);
 	~Entity();
 	void draw();
 	void update(float elapsed);
@@ -46,7 +46,7 @@ private:
 	float height;
 	float width;
 	float scale;
-	SheetSprite sprite;
+	SheetSprite* sprite;
 
 	//Physics
 	float velocity_x;

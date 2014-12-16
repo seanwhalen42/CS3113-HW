@@ -25,6 +25,7 @@ private:
 	bool done;
 	Entity* player;
 	std::vector <Entity*> entities;
+	std::vector <SheetSprite*> sprites;
 	//float timeLeftOver;
 	float lastFrameTicks;
 	SDL_Event event;
