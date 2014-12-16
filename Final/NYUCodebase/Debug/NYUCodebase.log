@@ -1,15 +1,12 @@
-﻿Build started 12/16/2014 12:34:10 AM.
+﻿Build started 12/16/2014 2:47:51 AM.
      1>Project "C:\Users\Sean\CS3113-HW\Final\NYUCodebase\NYUCodebase.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2\include /IC:\SDL2_image\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt App.cpp Entity.cpp main.cpp
-         Entity.cpp
-     1>c:\users\sean\cs3113-hw\final\nyucodebase\entity.cpp(8): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2\include /IC:\SDL2_image\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt App.cpp
          App.cpp
      1>c:\users\sean\cs3113-hw\final\nyucodebase\app.h(9): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>c:\users\sean\cs3113-hw\final\nyucodebase\app.cpp(44): warning C4305: 'argument' : truncation from 'double' to 'float'
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         main.cpp
+     1>c:\users\sean\cs3113-hw\final\nyucodebase\app.h(10): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\sean\cs3113-hw\final\nyucodebase\app.cpp(41): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\sean\cs3113-hw\final\nyucodebase\app.cpp(42): warning C4305: 'argument' : truncation from 'double' to 'float'
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Sean\CS3113-HW\Final\Debug\NYUCodebase.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 SDL2.lib SDL2main.lib SDL2_image.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Sean\CS3113-HW\Final\Debug\NYUCodebase.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Sean\CS3113-HW\Final\Debug\NYUCodebase.lib" /MACHINE:X86 Debug\App.obj
          Debug\Config.obj
@@ -21,4 +18,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.61
+Time Elapsed 00:00:00.90

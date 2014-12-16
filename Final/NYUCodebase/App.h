@@ -7,6 +7,7 @@
 #include "Config.h"
 
 const float COLLISION_BUFFER = 0.001;
+const float BARRIER_SPEED = 0.001;
 
 class App{
 public:
@@ -27,9 +28,10 @@ private:
 	Entity* player;
 	Entity* bottomWall;
 	Entity* topWall;
+	Entity* topBarrier;
+	Entity* bottomBarrier;
 	std::vector <Entity*> entities;
 	std::vector <SheetSprite*> sprites;
-	//float timeLeftOver;
 	float lastFrameTicks;
 	SDL_Event event;
 	SDL_Window* displayWindow;

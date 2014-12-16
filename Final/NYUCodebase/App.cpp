@@ -38,11 +38,16 @@ void App::setup(){
 	sprites.push_back(aliensSprite);
 
 	player = new Entity(0.0f, 2.0f, aliensSprite);
-	
 	bottomWall = new Entity(0.0f, -1.1f, NULL, true, 1.5, 0.05, 1);
+	topWall = new Entity(0.0f, 1.1, NULL, true, 1.5, 0.05, 1);
+	bottomBarrier = new Entity(1.5f, -1.0f, NULL, true, 0.25, 0.5, 1);
+	topBarrier = new Entity(1.5f, 1.0f, NULL, true, 0.25, 0.5, 1);
+	
 	entities.push_back(player);
 	entities.push_back(bottomWall);
-	//entities.push_back(platform);
+	entities.push_back(topWall);
+	entities.push_back(bottomBarrier);
+	entities.push_back(topBarrier);
 }
 
 void App::processInput(){
@@ -84,7 +89,15 @@ void App::update(float elapsed){
 			e->update(elapsed);
 		}
 	}
+
+	topBarrier->setX(topBarrier->getX() - BARRIER_SPEED);
+	bottomBarrier->setX(bottomBarrier->getX() - BARRIER_SPEED);
 	
+	if (topBarrier->getX() < -1.5){
+		topBarrier->setX(1.5);
+		bottomBarrier->setX(1.5);
+	}
+
 	std::vector<Entity*>::iterator iter = entities.begin();
 	iter = entities.begin();
 	while (iter != entities.end()){
